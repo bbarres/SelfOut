@@ -5,56 +5,117 @@
 ###############################################################################
 
 
-op<-par(mfrow=c(1,5),mar=c(5.1,5.1,4.1,2.1), oma=c(0,0,0,0))
+###############################################################################
+#first try
+###############################################################################
 
+op<-par(mfrow=c(1,3),mar=c(5.1,16,6.1,2.1), oma=c(0,0,0,0))
+
+#first plot for the overwintering success
+coolcol<-c("darkblue","deeppink3")
+datmat<-matrix(c(51,74,48,65),nrow=2)
+temp<-barplot(datmat,beside=TRUE,border=NA,col=coolcol,
+              names.arg=list("Winter 2012/2013","Winter 2013/2014"),
+              main=coolcol,font=2,las=1,cex.lab=2,lwd=5,ylim=c(0,110))
+mtext(side=2,text="Percentage of overwintering success",line=4,font=2,cex=1.2)
+text(temp[1],datmat[1]+3,"n=299",font=2)
+text(temp[2],datmat[2]+3,"n=338",font=2)
+text((temp[1]+temp[2])/2,max(datmat[1:2])+10,"***",font=2,cex=4)
+text(temp[3],datmat[3]+3,"n=372",font=2)
+text(temp[4],datmat[4]+3,"n=346",font=2)
+text((temp[3]+temp[4])/2,max(datmat[3:4])+10,"*",font=2,cex=4)
+mtext(side=2,text="A)",font=2,cex=1.2,adj=3,padj=-18,las=1)
+
+#second plot for the colonization success
 coolcol<-c("dodgerblue3","deeppink")
-temp<-barplot(matrix(c(14,16,23,56),nrow=2),beside=TRUE,border=NA,col=coolcol,
-              lwd=5,ylim=c(0,70),names.arg=list("2012/2013","2013/2014"),
-              main=coolcol,font=2,las=1,cex.lab=1.5,
-              ylab="Percentage of overwintering success")
+datmat<-matrix(c(13,14,12,17),nrow=2)
+temp<-barplot(datmat,beside=TRUE,border=NA,col=coolcol,
+              names.arg=list("2012","2013"),
+              main=coolcol,font=2,las=1,cex.lab=2,lwd=5,ylim=c(0,110))
+mtext(side=2,text="Percentage of colonyzed populations",line=4,font=2,cex=1.2)
+text(temp[1],datmat[1]+3,"n=1263",font=2)
+text(temp[2],datmat[2]+3,"n=2044",font=2)
+text((temp[1]+temp[2])/2,max(datmat[1:2])+10,"*",font=2,cex=4)
+text(temp[3],datmat[3]+3,"n=962",font=2)
+text(temp[4],datmat[4]+3,"n=1184",font=2)
+text((temp[3]+temp[4])/2,max(datmat[3:4])+10,"*",font=2,cex=4)
+mtext(side=2,text="B)",font=2,cex=1.2,adj=3,padj=-18,las=1)
 
-coolcol<-c("darkblue","deeppink2")
-temp<-barplot(matrix(c(14,16,23,56),nrow=2),beside=TRUE,border=NA,col=coolcol,
-              lwd=5,ylim=c(0,70),names.arg=list("2012/2013","2013/2014"),
-              main=coolcol,font=2,las=1,cex.lab=1.5,
-              ylab="Percentage of overwintering success")
-
-coolcol<-c("dodgerblue3","deeppink2")
-temp<-barplot(matrix(c(14,16,23,56),nrow=2),beside=TRUE,border=NA,col=coolcol,
-              lwd=5,ylim=c(0,70),names.arg=list("2012/2013","2013/2014"),
-              main=coolcol,font=2,las=1,cex.lab=1.5,
-              ylab="Percentage of overwintering success")
-
-coolcol<-c("darkblue","pink2")
-temp<-barplot(matrix(c(14,16,23,56),nrow=2),beside=TRUE,border=NA,col=coolcol,
-              lwd=5,ylim=c(0,70),names.arg=list("2012/2013","2013/2014"),
-              main=coolcol,font=2,las=1,cex.lab=1.5,
-              ylab="Percentage of overwintering success")
-
+#third plot for the production of overwintering structures
 coolcol<-c("royalblue","hotpink")
-temp<-barplot(matrix(c(14,16,23,56),nrow=2),beside=TRUE,border=NA,col=coolcol,
-              lwd=5,ylim=c(0,70),names.arg=list("2012/2013","2013/2014"),
-              main=coolcol,font=2,las=1,cex.lab=1.5,
-              ylab="Percentage of overwintering success")
+datmat<-matrix(c(98,98,95,97),nrow=2)
+temp<-barplot(datmat,beside=TRUE,border=NA,col=coolcol,
+              names.arg=list("2012","2013"),
+              main=coolcol,font=2,las=1,cex.lab=2,lwd=5,ylim=c(0,110))
+mtext(side=2,text="Percentage of populations with resting structures",
+      line=4,font=2,cex=1.2)
+text(temp[1],datmat[1]+3,"n=274",font=2)
+text(temp[2],datmat[2]+3,"n=315",font=2)
+text((temp[1]+temp[2])/2,max(datmat[1:2])+10,"ns",font=3,cex=2)
+text(temp[3],datmat[3]+3,"n=374",font=2)
+text(temp[4],datmat[4]+3,"n=343",font=2)
+text((temp[3]+temp[4])/2,max(datmat[3:4])+10,"ns",font=3,cex=2)
+mtext(side=2,text="C)",font=2,cex=1.2,adj=3,padj=-18,las=1)
 
-text(temp[1],matrix(c(14,16,23,56),nrow=2)[1]+3,"n=214",font=2)
-text(temp[2],matrix(c(14,16,23,56),nrow=2)[2]+3,"n=312",font=2)
+par(op)
 
-text((temp[1]+temp[2])/2,max(matrix(c(14,16,23,56),nrow=2)[1:2])+10,"*",font=2,cex=4)
+###############################################################################
+#second try
+###############################################################################
 
-text(temp[3],matrix(c(14,16,23,56)+3,nrow=2)[3],"n=682",font=2)
-text(temp[4],matrix(c(14,16,23,56)+3,nrow=2)[4],"n=454",font=2)
+op<-par(mfrow=c(1,3),mar=c(5.1,16,6.1,2.1), oma=c(0,0,0,0))
 
-text((temp[3]+temp[4])/2,max(matrix(c(14,16,23,56),nrow=2)[3:4])+10,"***",font=2,cex=4)
+#first plot for the overwintering success
+coolcol<-c("blue","red")
+datmat<-matrix(c(51,74,48,65),nrow=2)
+temp<-barplot(datmat,beside=TRUE,border=NA,col=coolcol,
+              names.arg=list("Winter 2012/2013","Winter 2013/2014"),
+              main=coolcol,font=2,las=1,cex.lab=2,lwd=5,ylim=c(0,90))
+mtext(side=2,text="% of overwintering success",line=4,font=2,cex=1.2)
+text(temp[1],datmat[1]+2,"n=299",font=2)
+text(temp[2],datmat[2]+2,"n=338",font=2)
+text((temp[1]+temp[2])/2,max(datmat[1:2])+6,"***",font=2,cex=4)
+text(temp[3],datmat[3]+2,"n=372",font=2)
+text(temp[4],datmat[4]+2,"n=346",font=2)
+text((temp[3]+temp[4])/2,max(datmat[3:4])+6,"*",font=2,cex=4)
+mtext(side=2,text="A)",font=2,cex=1.2,adj=3,padj=-18,las=1)
+
+#second plot for the colonization success
+coolcol<-c("midnightblue","magenta")
+datmat<-matrix(c(13,14,12,17),nrow=2)
+temp<-barplot(datmat,beside=TRUE,border=NA,col=coolcol,
+              names.arg=list("2012","2013"),
+              main=coolcol,font=2,las=1,cex.lab=2,lwd=5,ylim=c(0,25))
+mtext(side=2,text="% of colonyzed populations",line=4,font=2,cex=1.2)
+text(temp[1],datmat[1]+1,"n=1263",font=2)
+text(temp[2],datmat[2]+1,"n=2044",font=2)
+text((temp[1]+temp[2])/2,max(datmat[1:2])+3,"*",font=2,cex=4)
+text(temp[3],datmat[3]+1,"n=962",font=2)
+text(temp[4],datmat[4]+1,"n=1184",font=2)
+text((temp[3]+temp[4])/2,max(datmat[3:4])+3,"*",font=2,cex=4)
+mtext(side=2,text="B)",font=2,cex=1.2,adj=3,padj=-18,las=1)
+
+#third plot for the production of overwintering structures
+coolcol<-c("steelblue2","pink3")
+datmat<-matrix(c(98,98,95,97),nrow=2)
+temp<-barplot(datmat,beside=TRUE,border=NA,col=coolcol,
+              names.arg=list("2012","2013"),
+              main=coolcol,font=2,las=1,cex.lab=2,lwd=5,ylim=c(0,110))
+mtext(side=2,text="% of populations with resting structures",
+      line=4,font=2,cex=1.2)
+text(temp[1],datmat[1]+3,"n=274",font=2)
+text(temp[2],datmat[2]+3,"n=315",font=2)
+text((temp[1]+temp[2])/2,max(datmat[1:2])+10,"ns",font=3,cex=2)
+text(temp[3],datmat[3]+3,"n=374",font=2)
+text(temp[4],datmat[4]+3,"n=343",font=2)
+text((temp[3]+temp[4])/2,max(datmat[3:4])+10,"ns",font=3,cex=2)
+mtext(side=2,text="C)",font=2,cex=1.2,adj=3,padj=-18,las=1)
 
 par(op)
 
 
+
+
+
+
 which(colors()=="hotpink")
-
-
-
-
-
-
-
