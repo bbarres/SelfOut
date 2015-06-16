@@ -59,6 +59,8 @@ mtext(side=2,text="C)",font=2,cex=1.2,adj=3,padj=-18,las=1)
 
 par(op)
 
+#export to pdf 16 X 9 inches
+
 ###############################################################################
 #second try
 ###############################################################################
@@ -113,7 +115,7 @@ mtext(side=2,text="C)",font=2,cex=1.2,adj=3,padj=-18,las=1)
 
 par(op)
 
-
+#export to pdf 16 X 9 inches
 
 
 
