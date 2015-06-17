@@ -4,7 +4,7 @@
 ###############################################################################
 ###############################################################################
 
-#before using this code, you need first you have to run 'selfout_loadata.R'
+#before using this code, you have to run 'selfout_loadata.R' first
 
 op<-par(mfrow=c(2,2),mar=c(2,1,2,1))
 
