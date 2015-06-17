@@ -120,8 +120,10 @@ abline(v=temp$`Mean intra patch distance (m)`,col="red")
 
 par(op)
 
-#cleanning of the environment
+#cleanning the environment
 rm(intradist10,intradist11,intradist12,intradist13,temp,CompIntraDist)
+
+#export to pdf file 8 X 16 inches
 
 
 ###############################################################################
