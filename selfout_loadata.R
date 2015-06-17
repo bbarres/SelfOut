@@ -5,6 +5,8 @@
 ###############################################################################
 
 setwd("~/work/Rfichiers/Githuber/SelfOut_data")
+#before running this code, you need to import and transform the dataset using 
+#'selfout_importdata.R' first
 
 
 ###############################################################################

@@ -4,7 +4,7 @@
 ###############################################################################
 ###############################################################################
 
-#before using this code, you need first you have to run 'selfout_loadata.R'
+#before using this code, you have to run 'selfout_loadata.R' first
 
 #plotting Ar et Gr on the map for 2010
 op<-par(mfrow=c(1,2),mar=c(1,1,3,1))
