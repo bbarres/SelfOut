@@ -31,26 +31,31 @@ vecdistan <- data.frame(t(combn(rownames(coord),2)), as.numeric(vecdistan))
 #for 2013####
 
 #extract the list of the focal patches (infected in June and Sept)
-foc_patches<-levels(drop.levels(coinf2013$patche_ID[coinf2013$PA_S2013==1 & coinf2013$PA_2013==1]))
-#extract the list of the colonized patches (not infected in June but infected in Sept)
-colo<-coinf2013[coinf2013$PA_S2013!=1 | is.na(coinf2013$PA_S2013),]
-colo_patches<-levels(drop.levels(colo$patche_ID))
+foc_patches<-levels(drop.levels(coinf2013$patche_ID[coinf2013$PA_S2013==1 & 
+                                                      coinf2013$PA_2013==1]))
+#extract the list of the colonized patches (not infected 
+#in June but infected in Sept)
+colo_patches<-coinf2013[coinf2013$PA_S2013!=1 | is.na(coinf2013$PA_S2013),]
+colo_patches<-levels(drop.levels(colo_patches$patche_ID))
 #extract distances between focal patches and other patches
-vecdistanlim<-vecdistan[(vecdistan$X1 %in% foc_patches | vecdistan$X2 %in% foc_patches),]
+vecdistanlim<-vecdistan[(vecdistan$X1 %in% foc_patches | 
+                           vecdistan$X2 %in% foc_patches),]
 #list of patches excluding focal patches
-temp<-patche_info[!is.na(patche_info$PA_2013),1]
-other_patches<-setdiff(temp,foc_patches)
-#other_patches<-setdiff(patche_info[,1],foc_patches) #include patches without information
+other_patches<-patche_info[!is.na(patche_info$PA_2013),1]
+other_patches<-setdiff(other_patches,foc_patches)
+#include patches without information
+#other_patches<-setdiff(patche_info[,1],foc_patches) 
 
-closer<-data.frame("patche1_ID"=character(),"patche2_ID"=character(),"dist"=character())
+closer<-data.frame("patche1_ID"=character(),"patche2_ID"=character(),
+                   "dist"=character())
 for (i in 1:length(other_patches)) {
-  test<-vecdistanlim[(vecdistanlim$X1==other_patches[i] | vecdistanlim$X2==other_patches[i]),]
+  test<-vecdistanlim[(vecdistanlim$X1==other_patches[i] | 
+                        vecdistanlim$X2==other_patches[i]),]
   test2<-test[test[,3]==min(test[,3]),]
   colnames(test2)<-c("patche1_ID","patche2_ID","dist")
   closer<-rbind(closer,test2)
 }
 closer2013<-closer
-
 
 
 ###############################################################################
@@ -60,10 +65,12 @@ closer2013<-closer
 ####don´t forget to set the correct foc_patches!!!!#####
 
 #2013####
-foc_patches<-levels(drop.levels(coinf2013$patche_ID[coinf2013$PA_S2013==1 & coinf2013$PA_2013==1]))
+foc_patches<-levels(drop.levels(coinf2013$patche_ID[coinf2013$PA_S2013==1 & 
+                                                      coinf2013$PA_2013==1]))
 colo<-coinf2013[coinf2013$PA_S2013!=1 | is.na(coinf2013$PA_S2013),]
 colo_patches<-levels(drop.levels(colo$patche_ID))
-temp<-cbind(closer2013,"foc_patche"=ifelse(as.character(closer2013$patche1_ID) %in% foc_patches,as.character(closer2013$patche1_ID),
+temp<-cbind(closer2013,
+            "foc_patche"=ifelse(as.character(closer2013$patche1_ID) %in% foc_patches,as.character(closer2013$patche1_ID),
                                            as.character(closer2013$patche2_ID)))
 temp<-cbind(temp,"prox_patche"=ifelse(as.character(closer2013$patche1_ID) %in% foc_patches,as.character(closer2013$patche2_ID),
                                       as.character(closer2013$patche1_ID)))
@@ -229,6 +236,41 @@ plot(patchshape,col="white",lty=1,lwd=0.1,add=TRUE)
 plot(patchshape[patchshape[[3]] %in% inf_patches,1],col="blue",lty=0,add=TRUE)
 plot(patchshape[patchshape[[3]] %in% foc_patches,1],col="green",lty=0,add=TRUE)
 plot(patchshape[patchshape[[3]] %in% ext_patches,1],col="orange",lty=0,add=TRUE)
+
+
+
+###############################################################################
+#2012
+###############################################################################
+
+
+
+
+#extract the list of the focal patches (infected in June and Sept)
+foc_patches<-levels(drop.levels(coinf2012$patche_ID[coinf2012$PA_S2012==1 & coinf2012$PA_2012==1]))
+#extract the list of the colonized patches (not infected in June but infected in Sept)
+colo_patches<-coinf2012[coinf2012$PA_S2012!=1 | is.na(coinf2012$PA_S2012),]
+colo_patches<-levels(drop.levels(colo_patches$patche_ID))
+#extract distances between focal patches and other patches
+vecdistanlim<-vecdistan[(vecdistan$X1 %in% foc_patches | vecdistan$X2 %in% foc_patches),]
+#list of patches excluding focal patches
+other_patches<-patche_info[!is.na(patche_info$PA_2012),1]
+other_patches<-setdiff(other_patches,foc_patches)
+#other_patches<-setdiff(patche_info[,1],foc_patches) #include patches without information
+
+closer<-data.frame("patche1_ID"=character(),"patche2_ID"=character(),"dist"=character())
+for (i in 1:length(other_patches)) {#
+  test<-vecdistanlim[(vecdistanlim$X1==other_patches[i] | vecdistanlim$X2==other_patches[i]),]
+  test2<-test[test[,3]==min(test[,3]),]
+  colnames(test2)<-c("patche1_ID","patche2_ID","dist")
+  closer<-rbind(closer,test2)
+}
+closer2012<-closer
+
+
+
+
+
 
 
 
