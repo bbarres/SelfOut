@@ -1043,7 +1043,7 @@ boxplot(as.numeric(as.character(Div_Patch2013$Gr2013))~Div_Patch2013$Age_0_1)
 
 
 ###############################################################################
-#export the table and clean the environment
+#export the tables and clean the environment
 ###############################################################################
 
 write.table(Div_Patch2010,file="stat_patch2010.txt",row.names=FALSE,

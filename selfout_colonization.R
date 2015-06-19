@@ -15,13 +15,19 @@ library(visreg)
 #Compute the distances between every patches
 ###############################################################################
 
+#to compute the distances between every patches saves some computation time, 
+#because you only compute the distance matrix once. After that, when a distance 
+#matrix between a subset of patches is needed, you just need to select a subset 
+#of the complete distance matrix
+
 #load the coordinates of the patches
-coord<-patche_info[,c(5:6)]
-row.names(coord)<-patche_info[,1]
+coord <- patche_info[,c(5:6)]
+row.names(coord) <- patche_info[,1]
 #compute distances (km) between patches
-vecdistan<-dist(coord[1:2],method="euclidean",diag=FALSE,upper=FALSE)/1000
+vecdistan<-dist(coord[1:2],
+                method = "euclidean",diag = FALSE,upper = FALSE)/1000
 #turn the distance matrix into a dataframe
-vecdistan <- data.frame(t(combn(rownames(coord),2)), as.numeric(vecdistan))
+vecdistan<-data.frame(t(combn(rownames(coord),2)),as.numeric(vecdistan))
 
 
 ###############################################################################
@@ -29,6 +35,8 @@ vecdistan <- data.frame(t(combn(rownames(coord),2)), as.numeric(vecdistan))
 ###############################################################################
 
 #for 2013####
+
+eval(parse(text=paste(temp,temp2,sep="")))
 
 #extract the list of the focal patches (infected in June and Sept)
 foc_patches<-levels(drop.levels(coinf2013$patche_ID[coinf2013$PA_S2013==1 & 

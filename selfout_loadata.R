@@ -50,90 +50,92 @@ nb_SNP<- 19 #the number of markers used
 name_SNP<-dimnames(geno_hom)[[2]][3:(nb_SNP+3-1)]
 for (i in 3:(nb_SNP+3-1)) MLGmat<-paste(MLGmat,MLG[,i],sep="/")
 geno_hom<-data.frame(geno_hom,"MLG"=MLGmat,stringsAsFactors=FALSE)
+#cleanning the environment from useless objects
 rm(i,MLGmat,MLG)
 
 #we load the datatable which combine patches, genotypes information and 
 #indices that has been prepared using selfout_importdata.R
-coinf2010<-read.table("stat_patch2010.txt",header=TRUE,sep="\t",
-                      colClasses=c("factor","numeric","numeric","numeric","numeric","numeric",
-                                   "numeric","numeric","numeric","numeric","numeric","numeric",
-                                   "numeric","numeric","numeric","numeric","numeric","factor",
-                                   "character","character","numeric","numeric","numeric",
-                                   "numeric","numeric","numeric","numeric","numeric","numeric",
-                                   "numeric","numeric","factor","factor","factor","factor",
-                                   "factor","factor","factor","factor","factor","factor",
-                                   "factor","factor","factor","factor","numeric","factor",
-                                   "numeric","factor","factor","numeric","numeric","numeric",
-                                   "numeric","numeric","numeric","numeric","numeric","numeric",
-                                   "numeric","factor","factor","numeric","numeric","numeric",
-                                   "numeric","numeric","numeric","numeric","numeric","factor",
-                                   "numeric","numeric","numeric","numeric","numeric","numeric",
-                                   "numeric","numeric","numeric","numeric","numeric","numeric",
-                                   "numeric","factor","numeric","numeric",
-                                   "numeric","numeric","numeric","numeric","numeric",
-                                   "factor","factor","factor")
+coinf2010 <- read.table(
+  "stat_patch2010.txt",header = TRUE,sep = "\t",
+  colClasses = c(
+    "factor","numeric","numeric","numeric","numeric","numeric","numeric",
+    "numeric","numeric","numeric","numeric","numeric","numeric","numeric",
+    "numeric","numeric","numeric","factor","character","character","numeric",
+    "numeric","numeric","numeric","numeric","numeric","numeric","numeric",
+    "numeric","numeric","numeric","factor","factor","factor","factor","factor",
+    "factor","factor","factor","factor","factor","factor","factor","factor",
+    "factor","numeric","factor","numeric","factor","factor","numeric",
+    "numeric","numeric","numeric","numeric","numeric","numeric","numeric",
+    "numeric","numeric","factor","factor","numeric","numeric","numeric",
+    "numeric","numeric","numeric","numeric","numeric","factor","numeric",
+    "numeric","numeric","numeric","numeric","numeric","numeric","numeric",
+    "numeric","numeric","numeric","numeric","numeric","factor","numeric",
+    "numeric","numeric","numeric","numeric","numeric","numeric","factor",
+    "factor","factor"
+  )
 )
 
 
-coinf2011<-read.table("stat_patch2011.txt",header=TRUE,sep="\t",
-                      colClasses=c("factor","numeric","numeric","numeric","numeric","numeric",
-                                   "numeric","numeric","numeric","numeric","numeric","numeric",
-                                   "numeric","numeric","numeric","numeric","numeric","numeric","factor",
-                                   "character","character","numeric","numeric","numeric",
-                                   "numeric","numeric","numeric","numeric","numeric","numeric",
-                                   "numeric","numeric","factor","factor","factor","factor",
-                                   "factor","factor","factor","factor","factor","factor",
-                                   "factor","factor","factor","factor","numeric","factor",
-                                   "numeric","factor","factor","numeric","numeric","numeric",
-                                   "numeric","numeric","numeric","numeric","numeric","numeric",
-                                   "numeric","factor","factor","numeric","numeric","numeric",
-                                   "numeric","numeric","numeric","numeric","numeric","factor",
-                                   "numeric","numeric","numeric","numeric","numeric","numeric",
-                                   "numeric","numeric","numeric","numeric","numeric","numeric",
-                                   "numeric","factor","numeric","numeric",
-                                   "numeric","numeric","numeric","numeric","numeric",
-                                   "factor","factor","factor")
+coinf2011 <- read.table(
+  "stat_patch2011.txt",header = TRUE,sep = "\t",
+  colClasses = c(
+    "factor","numeric","numeric","numeric","numeric","numeric","numeric",
+    "numeric","numeric","numeric","numeric","numeric","numeric","numeric",
+    "numeric","numeric","numeric","numeric","factor","character","character",
+    "numeric","numeric","numeric","numeric","numeric","numeric","numeric",
+    "numeric","numeric","numeric","numeric","factor","factor","factor",
+    "factor","factor","factor","factor","factor","factor","factor","factor",
+    "factor","factor","factor","numeric","factor","numeric","factor","factor",
+    "numeric","numeric","numeric","numeric","numeric","numeric","numeric",
+    "numeric","numeric","numeric","factor","factor","numeric","numeric",
+    "numeric","numeric","numeric","numeric","numeric","numeric","factor",
+    "numeric","numeric","numeric","numeric","numeric","numeric","numeric",
+    "numeric","numeric","numeric","numeric","numeric","numeric","factor",
+    "numeric","numeric","numeric","numeric","numeric","numeric","numeric",
+    "factor","factor","factor"
+  )
 )
 
 
-coinf2012<-read.table("stat_patch2012.txt",header=TRUE,sep="\t",
-                      colClasses=c("factor","numeric","numeric","numeric","numeric","numeric",
-                                   "numeric","numeric","numeric","numeric","numeric","numeric","numeric",
-                                   "numeric","numeric","numeric","numeric","numeric","numeric","factor",
-                                   "character","character","numeric","numeric","numeric",
-                                   "numeric","numeric","numeric","numeric","numeric","numeric",
-                                   "numeric","numeric","factor","factor","factor","factor",
-                                   "factor","factor","factor","factor","factor","factor",
-                                   "factor","factor","factor","factor","numeric","factor",
-                                   "numeric","factor","factor","numeric","numeric","numeric",
-                                   "numeric","numeric","numeric","numeric","numeric","numeric",
-                                   "numeric","factor","factor","numeric","numeric","numeric",
-                                   "numeric","numeric","numeric","numeric","numeric","factor",
-                                   "numeric","numeric","numeric","numeric","numeric","numeric",
-                                   "numeric","numeric","numeric","numeric","numeric","numeric",
-                                   "numeric","factor","numeric","numeric",
-                                   "numeric","numeric","numeric","numeric","numeric",
-                                   "factor","factor","factor")
+coinf2012 <- read.table(
+  "stat_patch2012.txt",header = TRUE,sep = "\t",
+  colClasses = c(
+    "factor","numeric","numeric","numeric","numeric","numeric","numeric",
+    "numeric","numeric","numeric","numeric","numeric","numeric","numeric",
+    "numeric","numeric","numeric","numeric","numeric","factor","character",
+    "character","numeric","numeric","numeric","numeric","numeric","numeric",
+    "numeric","numeric","numeric","numeric","numeric","factor","factor",
+    "factor","factor","factor","factor","factor","factor","factor","factor",
+    "factor","factor","factor","factor","numeric","factor","numeric","factor",
+    "factor","numeric","numeric","numeric","numeric","numeric","numeric",
+    "numeric","numeric","numeric","numeric","factor","factor","numeric",
+    "numeric","numeric","numeric","numeric","numeric","numeric","numeric",
+    "factor","numeric","numeric","numeric","numeric","numeric","numeric",
+    "numeric","numeric","numeric","numeric","numeric","numeric","numeric",
+    "factor","numeric","numeric","numeric","numeric","numeric","numeric",
+    "numeric","factor","factor","factor"
+  )
 )
 
-coinf2013<-read.table("stat_patch2013.txt",header=TRUE,sep="\t",
-                      colClasses=c("factor","numeric","numeric","numeric","numeric","numeric",
-                                   "numeric","numeric","numeric","numeric","numeric","numeric","numeric",
-                                   "numeric","numeric","numeric","numeric","numeric","numeric","factor",
-                                   "character","character","numeric","numeric","numeric",
-                                   "numeric","numeric","numeric","numeric","numeric","numeric",
-                                   "numeric","numeric","factor","factor","factor","factor",
-                                   "factor","factor","factor","factor","factor","factor",
-                                   "factor","factor","factor","factor","numeric","factor",
-                                   "numeric","factor","factor","numeric","numeric","numeric",
-                                   "numeric","numeric","numeric","numeric","numeric","numeric",
-                                   "numeric","factor","factor","numeric","numeric","numeric",
-                                   "numeric","numeric","numeric","numeric","numeric","factor",
-                                   "numeric","numeric","numeric","numeric","numeric","numeric",
-                                   "numeric","numeric","numeric","numeric","numeric","numeric",
-                                   "numeric","factor","numeric","numeric",
-                                   "numeric","numeric","numeric","numeric","numeric",
-                                   "factor","factor","factor")
+
+coinf2013 <- read.table(
+  "stat_patch2013.txt",header = TRUE,sep = "\t",
+  colClasses = c(
+    "factor","numeric","numeric","numeric","numeric","numeric","numeric",
+    "numeric","numeric","numeric","numeric","numeric","numeric","numeric",
+    "numeric","numeric","numeric","numeric","numeric","factor","character",
+    "character","numeric","numeric","numeric","numeric","numeric","numeric",
+    "numeric","numeric","numeric","numeric","numeric","factor","factor",
+    "factor","factor","factor","factor","factor","factor","factor","factor",
+    "factor","factor","factor","factor","numeric","factor","numeric","factor",
+    "factor","numeric","numeric","numeric","numeric","numeric","numeric",
+    "numeric","numeric","numeric","numeric","factor","factor","numeric",
+    "numeric","numeric","numeric","numeric","numeric","numeric","numeric",
+    "factor","numeric","numeric","numeric","numeric","numeric","numeric",
+    "numeric","numeric","numeric","numeric","numeric","numeric","numeric",
+    "factor","numeric","numeric","numeric","numeric","numeric","numeric",
+    "numeric","factor","factor","factor"
+  )
 )
 
 
@@ -173,9 +175,9 @@ evolinf4<-cbind(evolinf4,"coinfCAT"=cut(evolinf4$percoinf,breaks=c(-1,1,24,49,74
                                         ordered_result=TRUE))
 
 
-##########################################################################################
+###############################################################################
 #formating dataset for production of chasmotecia
-##########################################################################################
+###############################################################################
 
 
 chasmo<-read.table("chasmo.txt",header=TRUE,sep="\t",
