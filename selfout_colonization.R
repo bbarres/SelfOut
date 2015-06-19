@@ -18,7 +18,7 @@ library(visreg)
 #load the coordinates of the patches
 coord<-patche_info[,c(5:6)]
 row.names(coord)<-patche_info[,1]
-#compute distances between patches
+#compute distances (km) between patches
 vecdistan<-dist(coord[1:2],method="euclidean",diag=FALSE,upper=FALSE)/1000
 #turn the distance matrix into a dataframe
 vecdistan <- data.frame(t(combn(rownames(coord),2)), as.numeric(vecdistan))
@@ -67,8 +67,8 @@ closer2013<-closer
 #2013####
 foc_patches<-levels(drop.levels(coinf2013$patche_ID[coinf2013$PA_S2013==1 & 
                                                       coinf2013$PA_2013==1]))
-colo<-coinf2013[coinf2013$PA_S2013!=1 | is.na(coinf2013$PA_S2013),]
-colo_patches<-levels(drop.levels(colo$patche_ID))
+colo_patches<-coinf2013[coinf2013$PA_S2013!=1 | is.na(coinf2013$PA_S2013),]
+colo_patches<-levels(drop.levels(colo_patches$patche_ID))
 temp<-cbind(closer2013,
             "foc_patche"=ifelse(as.character(closer2013$patche1_ID) %in% foc_patches,as.character(closer2013$patche1_ID),
                                            as.character(closer2013$patche2_ID)))
@@ -267,7 +267,97 @@ for (i in 1:length(other_patches)) {#
 }
 closer2012<-closer
 
+#2012####
+foc_patches<-levels(drop.levels(coinf2012$patche_ID[coinf2012$PA_S2012==1 & coinf2012$PA_2012==1]))
+colo<-coinf2012[coinf2012$PA_S2012!=1 | is.na(coinf2012$PA_S2012),]
+colo_patches<-levels(drop.levels(colo$patche_ID))
+temp<-cbind(closer2012,"foc_patche"=ifelse(as.character(closer2012$patche1_ID) %in% foc_patches,as.character(closer2012$patche1_ID),
+                                           as.character(closer2012$patche2_ID)))
+temp<-cbind(temp,"prox_patche"=ifelse(as.character(closer2012$patche1_ID) %in% foc_patches,as.character(closer2012$patche2_ID),
+                                      as.character(closer2012$patche1_ID)))
+temp<-merge(temp,coinf2012,by.x="foc_patche",by.y="patche_ID")
+temp<-merge(temp,patche_info,by.x="prox_patche",by.y="ID")
+temp<-merge(temp,coinf2012[,1:19],by.x="prox_patche",by.y="patche_ID",all.x=TRUE)
+temp<-data.frame(temp,"coinfYN"=temp$number_coinf.x)
+temp$coinfYN[(temp$coinfYN)>0]<-1
+temp$coinfYN<-as.factor(temp$coinfYN)
+temp$road_PA.y<-as.factor(temp$road_PA.y)
+temp<-data.frame(temp,"colonized"=ifelse(as.character(temp$prox_patche) %in% colo_patches,1,0))
+temp<-data.frame(temp,"Gdiv"=temp$number_MLG.x/temp$number_genotyped.x)
+temp<-temp[!is.na(temp$PLM2_Sept2012.y),]
+temp<-temp[!is.na(temp$road_PA.y),]
+#if you want to limit the radius of the interaction you are interested in
+plot(temp$dist,col=((as.numeric(temp$dist)>20)+1))
+temp<-temp[temp$dist<20,] #maybe a good idea to limit below 5 kms
+prevalcolo<-glm(colonized~cumulative_sum.x+Gdiv+connec2012.x+coinfYN+AA_S2012.x+log(dist),
+                family=binomial,data=temp)
+summary(prevalcolo)
+prevalcolo<-glm(colonized~PLM2_Sept2012.y+coinfYN+AA_S2012.x+log(dist),
+                family=binomial,data=temp)
+summary(prevalcolo)
+prevalcolo<-glm(colonized~I(sqrt(PLM2_Sept2012.y))+coinfYN+AA_S2012.x+log(dist),
+                family=binomial,data=temp)
+summary(prevalcolo)
+op<-par(mfrow=c(1,3))
+visreg(prevalcolo,"coinfYN",scale="response",overlay=TRUE,
+       xlab="No coinf (0)/ coinf (1)",ylab="P(colonize)")
+visreg(prevalcolo,"dist",rug=2,scale="response",jitter=TRUE,by="coinfYN",
+       overlay=TRUE,partial=FALSE,xlab="Distance to focal",ylab="P(colonize)")
+visreg(prevalcolo,"PLM2_Sept2012.y",rug=2,scale="response",jitter=TRUE,by="coinfYN",
+       overlay=TRUE,partial=FALSE,xlab="Net trapping area",ylab="P(colonize)")
+par(op)
+mixprevalcolo<-glmer(colonized~cumulative_sum.x+Gdiv+connec2012.x+coinfYN+AA_S2012.x+log(dist)+(1|foc_patche),
+                     family=binomial,data=temp)
+summary(mixprevalcolo)
+mixprevalcolo<-glmer(colonized~I(sqrt(PLM2_Sept2012.y))+coinfYN+AA_S2012.x+log(dist)+(1|foc_patche),
+                     family=binomial,data=temp)
+summary(mixprevalcolo)
+#remove focal patches where nothing happens
+active<-levels(drop.levels(temp[temp$colonized==1,]$foc_patch))
+temp2<-temp[temp$foc_patch %in% active,]
+prevalcolo<-glm(colonized~cumulative_sum.x+Gdiv+connec2012.x+coinfYN+AA_S2012.x+log(dist),
+                family=binomial,data=temp2)
+summary(prevalcolo)
+prevalcolo<-glm(colonized~PLM2_Sept2012.y+coinfYN+AA_S2012.x+log(dist),
+                family=binomial,data=temp2)
+summary(prevalcolo)
+prevalcolo<-glm(colonized~I(sqrt(PLM2_Sept2012.y))+coinfYN+AA_S2012.x+log(dist),
+                family=binomial,data=temp2)
+summary(prevalcolo)
+op<-par(mfrow=c(1,3))
+visreg(prevalcolo,"coinfYN",scale="response",overlay=TRUE,
+       xlab="No coinf (0)/ coinf (1)",ylab="P(colonize)")
+visreg(prevalcolo,"dist",rug=2,scale="response",jitter=TRUE,by="coinfYN",
+       overlay=TRUE,partial=FALSE,xlab="Distance to focal",ylab="P(colonize)")
+visreg(prevalcolo,"PLM2_Sept2012.y",rug=2,scale="response",jitter=TRUE,by="coinfYN",
+       overlay=TRUE,partial=FALSE,xlab="Net trapping area",ylab="P(colonize)")
+par(op)
 
+prevalcolo_1<-glm(colonized~shadow.y+Sh.y+road_PA.y+PLM2_Sept2012.y+coinfYN+AA_S2012.x+log(dist),
+                  family=binomial,data=temp2)
+summary(prevalcolo_1)
+prevalcolo_2<-glm(colonized~Sh.y+road_PA.y+PLM2_Sept2012.y+coinfYN+AA_S2012.x+log(dist),
+                  family=binomial,data=temp2)
+summary(prevalcolo_2)
+prevalcolo_3<-glm(colonized~shadow.y+road_PA.y+PLM2_Sept2012.y+coinfYN+AA_S2012.x+log(dist),
+                  family=binomial,data=temp2)
+summary(prevalcolo_3)
+prevalcolo_4<-glm(colonized~shadow.y+Sh.y+PLM2_Sept2012.y+coinfYN+AA_S2012.x+log(dist),
+                  family=binomial,data=temp2)
+summary(prevalcolo_4)
+prevalcolo_5<-glm(colonized~shadow.y+Sh.y+road_PA.y+coinfYN+AA_S2012.x+log(dist),
+                  family=binomial,data=temp2)
+summary(prevalcolo_5)
+prevalcolo_6<-glm(colonized~shadow.y+Sh.y+road_PA.y+PLM2_Sept2012.y+AA_S2012.x+log(dist),
+                  family=binomial,data=temp2)
+summary(prevalcolo_6)
+prevalcolo_7<-glm(colonized~shadow.y+Sh.y+road_PA.y+PLM2_Sept2012.y+coinfYN+log(dist),
+                  family=binomial,data=temp2)
+summary(prevalcolo_7)
+prevalcolo_8<-glm(colonized~shadow.y+Sh.y+road_PA.y+PLM2_Sept2012.y+coinfYN+AA_S2012.x,
+                  family=binomial,data=temp2)
+summary(prevalcolo_8)
+anova(prevalcolo_2,prevalcolo_1,test="Chisq")
 
 
 
