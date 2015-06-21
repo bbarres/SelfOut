@@ -34,10 +34,10 @@ vecdistan<-data.frame(t(combn(rownames(coord),2)),as.numeric(vecdistan))
 #Identify the closest focal patch to other patches
 ###############################################################################
 
-closerList(coinf2013,coinf2013$PA_S2013,coinf2013$PA_2013)
+#we build a small function that seek for the closest focal patch to other 
+#patches
 
-#for 2013####
-closerList<-function(datatab,spring_PA,fall_PA){
+closerList<-function(datatab,spring_PA,fall_PA,all_patch){
   #extract the list of the focal patches (infected in June and Sept)
   foc_patches<-datatab[spring_PA==1 & fall_PA==1,"patche_ID"]
   foc_patches<-levels(drop.levels(foc_patches))
@@ -49,7 +49,7 @@ closerList<-function(datatab,spring_PA,fall_PA){
   vecdistanlim<-vecdistan[(vecdistan$X1 %in% foc_patches | 
                              vecdistan$X2 %in% foc_patches),]
   #list of patches excluding focal patches
-  other_patches<-patche_info[!is.na(patche_info$PA_2013),"ID"]
+  other_patches<-patche_info[!is.na(all_patch),"ID"]
   other_patches<-setdiff(other_patches,foc_patches)
   #include patches without information
   #other_patches<-setdiff(patche_info[,1],foc_patches) 
@@ -63,7 +63,18 @@ closerList<-function(datatab,spring_PA,fall_PA){
     colnames(test2)<-c("patche1_ID","patche2_ID","dist")
     closer<-rbind(closer,test2)
   }
+  return(closer)
 }
+
+#for 2013####
+closer2013<-closerList(coinf2013,coinf2013$PA_S2013,coinf2013$PA_2013,
+                       patche_info$PA_2013)
+
+#for 2012####
+closer2012<-closerList(coinf2012,coinf2012$PA_S2012,coinf2012$PA_2012,
+                       patche_info$PA_2012)
+
+
 
 eval(parse(text=paste(temp,temp2,sep="")))
 
