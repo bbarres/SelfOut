@@ -66,122 +66,69 @@ closerList<-function(datatab,spring_PA,fall_PA,all_patch){
   return(closer)
 }
 
-#for 2013####
+
+#for 2013#### takes some time to run: ~30 min
 closer2013<-closerList(coinf2013,coinf2013$PA_S2013,coinf2013$PA_2013,
                        patche_info$PA_2013)
 
-#for 2012####
+#for 2012#### takes some time to run: ~30 min
 closer2012<-closerList(coinf2012,coinf2012$PA_S2012,coinf2012$PA_2012,
                        patche_info$PA_2012)
 
 
 
+
 eval(parse(text=paste(temp,temp2,sep="")))
 
-#extract the list of the focal patches (infected in June and Sept)
-foc_patches<-levels(drop.levels(coinf2013$patche_ID[coinf2013$PA_S2013==1 & 
-                                                      coinf2013$PA_2013==1]))
-#extract the list of the colonized patches (not infected 
-#in June but infected in Sept)
-colo_patches<-coinf2013[coinf2013$PA_S2013!=1 | is.na(coinf2013$PA_S2013),]
-colo_patches<-levels(drop.levels(colo_patches$patche_ID))
-#extract distances between focal patches and other patches
-vecdistanlim<-vecdistan[(vecdistan$X1 %in% foc_patches | 
-                           vecdistan$X2 %in% foc_patches),]
-#list of patches excluding focal patches
-other_patches<-patche_info[!is.na(patche_info$PA_2013),1]
-other_patches<-setdiff(other_patches,foc_patches)
-#include patches without information
-#other_patches<-setdiff(patche_info[,1],foc_patches) 
-
-closer<-data.frame("patche1_ID"=character(),"patche2_ID"=character(),
-                   "dist"=character())
-for (i in 1:length(other_patches)) {
-  test<-vecdistanlim[(vecdistanlim$X1==other_patches[i] | 
-                        vecdistanlim$X2==other_patches[i]),]
-  test2<-test[test[,3]==min(test[,3]),]
-  colnames(test2)<-c("patche1_ID","patche2_ID","dist")
-  closer<-rbind(closer,test2)
-}
-closer2013<-closer
-
 
 ###############################################################################
-#Modelisation of the colonization success: distance, coinfection...
+#Modelisation of the colonization success
 ###############################################################################
 
-####don´t forget to set the correct foc_patches!!!!#####
-
-#2013####
-foc_patches<-levels(drop.levels(coinf2013$patche_ID[coinf2013$PA_S2013==1 & 
-                                                      coinf2013$PA_2013==1]))
-colo_patches<-coinf2013[coinf2013$PA_S2013!=1 | is.na(coinf2013$PA_S2013),]
+#preparing the table before glm analysis for 2013
+foc_patches<-coinf2013[coinf2013$PA_S2013 == 1 & coinf2013$PA_2013 == 1,]
+foc_patches<-levels(drop.levels(foc_patches$patche_ID))
+colo_patches<-coinf2013[coinf2013$PA_S2013 != 1 | is.na(coinf2013$PA_S2013),]
 colo_patches<-levels(drop.levels(colo_patches$patche_ID))
-temp<-cbind(closer2013,
-            "foc_patche"=ifelse(as.character(closer2013$patche1_ID) %in% foc_patches,as.character(closer2013$patche1_ID),
-                                           as.character(closer2013$patche2_ID)))
-temp<-cbind(temp,"prox_patche"=ifelse(as.character(closer2013$patche1_ID) %in% foc_patches,as.character(closer2013$patche2_ID),
-                                      as.character(closer2013$patche1_ID)))
-temp<-merge(temp,coinf2013,by.x="foc_patche",by.y="patche_ID")
-temp<-merge(temp,patche_info,by.x="prox_patche",by.y="ID")
-temp<-merge(temp,coinf2013[,1:19],by.x="prox_patche",by.y="patche_ID",all.x=TRUE)
-temp<-data.frame(temp,"coinfYN"=temp$number_coinf.x)
-temp$coinfYN[(temp$coinfYN)>0]<-1
-temp$coinfYN<-as.factor(temp$coinfYN)
-temp$road_PA.y<-as.factor(temp$road_PA.y)
-temp<-data.frame(temp,"colonized"=ifelse(as.character(temp$prox_patche) %in% colo_patches,1,0))
-temp<-data.frame(temp,"Gdiv"=temp$number_MLG.x/temp$number_genotyped.x)
-temp<-temp[!is.na(temp$PLM2_Sept2013.y),]
-temp<-temp[!is.na(temp$road_PA.y),]
+temp <- cbind(
+  closer2013,
+  "foc_patche" = ifelse(
+    as.character(closer2013$patche1_ID) %in% foc_patches,
+    as.character(closer2013$patche1_ID),
+    as.character(closer2013$patche2_ID)
+  )
+)
+temp <-
+  cbind(temp,"prox_patche" = ifelse(
+    as.character(closer2013$patche1_ID) %in% foc_patches,
+    as.character(closer2013$patche2_ID),
+    as.character(closer2013$patche1_ID)
+  ))
+temp <- merge(temp,coinf2013,by.x = "foc_patche",by.y = "patche_ID")
+temp <- merge(temp,patche_info,by.x = "prox_patche",by.y = "ID")
+temp <- merge(temp,coinf2013[,1:19],by.x = "prox_patche",by.y = "patche_ID",
+              all.x = TRUE)
+temp <- data.frame(temp,"coinfYN" = temp$number_coinf.x)
+temp$coinfYN[(temp$coinfYN) > 0] <- 1
+temp$coinfYN <- as.factor(temp$coinfYN)
+temp$road_PA.y <- as.factor(temp$road_PA.y)
+temp <- data.frame(temp,
+                   "colonized" = ifelse(as.character(temp$prox_patche) %in% 
+                                          colo_patches,1,0))
+temp <- data.frame(temp,"Gdiv" = temp$number_MLG.x / temp$number_genotyped.x)
+temp <- temp[!is.na(temp$PLM2_Sept2013.y),]
+temp <- temp[!is.na(temp$road_PA.y),]
 #here there is a particular problem with patches in Kökar. This place probably wasn't surveyed in July or 
 #no infected patch was detected, therefore the closest focal patch is more than 20 km away. 
 plot(temp$dist,col=((as.numeric(temp$dist)>20)+1))
 #here the probability that the "closest" focal patch is the patch of origin is very small, so we remove these 
 #observation from the dataset
 temp<-temp[temp$dist<20,]
-prevalcolo<-glm(colonized~cumulative_sum.x+Gdiv+connec2013.x+coinfYN+AA_S2013.x+log(dist),
-                family=binomial,data=temp)
-summary(prevalcolo)
-prevalcolo<-glm(colonized~PLM2_Sept2013.y+coinfYN+AA_S2013.x+log(dist),
-                family=binomial,data=temp)
-summary(prevalcolo)
-prevalcolo<-glm(colonized~I(sqrt(PLM2_Sept2013.y))+coinfYN+AA_S2013.x+log(dist),
-                family=binomial,data=temp)
-summary(prevalcolo)
-op<-par(mfrow=c(1,3))
-visreg(prevalcolo,"coinfYN",scale="response",overlay=TRUE,
-       xlab="No coinf (0)/ coinf (1)",ylab="P(colonize)")
-visreg(prevalcolo,"AA_S2013.x",rug=2,scale="response",jitter=TRUE,by="coinfYN",
-       overlay=TRUE,partial=FALSE,xlab="Abundance Spring",ylab="P(colonize)")
-visreg(prevalcolo,"PLM2_Sept2013.y",rug=2,scale="response",jitter=TRUE,by="coinfYN",
-       overlay=TRUE,partial=FALSE,xlab="Net trapping area",ylab="P(colonize)")
-par(op)
-mixprevalcolo<-glmer(colonized~cumulative_sum.x+Gdiv+connec2013.x+coinfYN+AA_S2013.x+log(dist)+(1|foc_patche),
-                     family=binomial,data=temp)
-summary(mixprevalcolo)
-mixprevalcolo<-glmer(colonized~connec2013.x+coinfYN+AA_S2013.x+log(dist)+(1|foc_patche),
-                     family=binomial,data=temp)
-summary(mixprevalcolo)
-mixprevalcolo<-glmer(colonized~I(sqrt(PLM2_Sept2013.y))+coinfYN+AA_S2013.x+log(dist)+(1|foc_patche),
-                     family=binomial,data=temp)
-summary(mixprevalcolo)
+
 #remove focal patches where nothing happens (not a single colonization event)
 active<-levels(drop.levels(temp[temp$colonized==1,]$foc_patch))
 temp2<-temp[temp$foc_patch %in% active,]
-prevalcolo<-glm(colonized~PLM2_Sept2013.y+coinfYN+AA_S2013.x+log(dist),
-                family=binomial,data=temp2)
-summary(prevalcolo)
-prevalcolo<-glm(colonized~I(sqrt(PLM2_Sept2013.y))+coinfYN+AA_S2013.x+log(dist),
-                family=binomial,data=temp2)
-summary(prevalcolo)
-op<-par(mfrow=c(1,3))
-visreg(prevalcolo,"coinfYN",scale="response",overlay=TRUE,
-       xlab="No coinf (0)/ coinf (1)",ylab="P(colonize)")
-visreg(prevalcolo,"dist",rug=2,scale="response",jitter=TRUE,by="coinfYN",
-       overlay=TRUE,partial=FALSE,xlab="Abundance Spring",ylab="P(colonize)")
-visreg(prevalcolo,"PLM2_Sept2013.y",rug=2,scale="response",jitter=TRUE,by="coinfYN",
-       overlay=TRUE,partial=FALSE,xlab="Net trapping area",ylab="P(colonize)")
-par(op)
+
 
 prevalcolo_1<-glm(colonized~shadow.y+Sh.y+road_PA.y+PLM2_Sept2013.y+coinfYN+AA_S2013.x+log(dist),
                   family=binomial,data=temp2)
