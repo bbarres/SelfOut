@@ -117,8 +117,6 @@ temp <- data.frame(temp,
                    "colonized" = ifelse(as.character(temp$prox_patche) %in% 
                                           colo_patches,1,0))
 temp <- data.frame(temp,"Gdiv" = temp$number_MLG.x / temp$number_genotyped.x)
-temp <- temp[!is.na(temp$PLM2_Sept2013.y),]
-temp <- temp[!is.na(temp$road_PA.y),]
 #here there is a particular problem with patches in Kökar. This place probably 
 #wasn't surveyed in July or no infected patch was detected, therefore the 
 #closest focal patch is more than 20 km away. 
@@ -173,9 +171,9 @@ temp <- data.frame(temp,"coinfYN" = temp$number_coinf.x)
 temp$coinfYN[(temp$coinfYN) > 0] <- 1
 temp$coinfYN <- as.factor(temp$coinfYN)
 temp$road_PA.y <- as.factor(temp$road_PA.y)
-temp <-
-  data.frame(temp,"colonized" = ifelse(as.character(temp$prox_patche) %in% 
-                                         colo_patches,1,0))
+temp <- data.frame(temp,
+                   "colonized" = ifelse(as.character(temp$prox_patche) %in% 
+                                          colo_patches,1,0))
 temp <- data.frame(temp,"Gdiv" = temp$number_MLG.x / temp$number_genotyped.x)
 #checking that we don't have the same problem as in 2013 with isolated patches
 plot(temp$dist,col = ((as.numeric(temp$dist) > 20) + 1))
@@ -204,12 +202,12 @@ rm(temp,active,foc_patches,colo_patches)
 #plotting example of patch colonization in 2013
 #first we build lists of the different patch categories
 #The first category is the focal patches
-foc_patches<-levels(drop.levels(coinf2013$patche_ID[coinf2013$PA_S2013==1 & 
+foc_patches <- levels(drop.levels(coinf2013$patche_ID[coinf2013$PA_S2013==1 & 
                                                       coinf2013$PA_2013==1]))
 #then we have the patches that are infected at the end of the season
-inf_patches<-levels(drop.levels(coinf2013$patche_ID[coinf2013$PA_2013==1]))
+inf_patches <- levels(drop.levels(coinf2013$patche_ID[coinf2013$PA_2013==1]))
 #and the patches that went extinct during the epidemic
-ext_patches<-levels(drop.levels(as.factor(patche_info[patche_info$PA_S2013==1 
+ext_patches <- levels(drop.levels(as.factor(patche_info[patche_info$PA_S2013==1 
                                             & patche_info$PA_2013==0,"ID"])))
 #we plot the background of the map
 plot(Aland,col=grey(0.85),lty=0)
@@ -239,8 +237,8 @@ temp<-merge(temp,coinf2013[,1:19],by.x="prox_patche",
             by.y="patche_ID",all.x=TRUE)
 #we list the focal patches with coinfection
 fopa_coin<-levels(drop.levels(coinf2013$patche_ID[coinf2013$PA_S2013==1 & 
-                                                    coinf2013$PA_2013==1 & 
-                                                    coinf2013$number_coinf!=0]))
+                                                  coinf2013$PA_2013==1 & 
+                                                  coinf2013$number_coinf!=0]))
 #and the colonized patches as from a coinfected patch
 prpa_coin<-levels(drop.levels(temp$prox_patche[temp$PA_2013.y==1 & 
                                                  temp$foc_patche %in% 
@@ -313,12 +311,8 @@ rm(prpa_coin,fopa_coin,temp,foc_patches,inf_patches,ext_patches)
 
 
 
-
-
 ############
 rm(coord,vecdistan)
-
-
 
 
 
