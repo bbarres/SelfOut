@@ -316,7 +316,7 @@ rm(prpa_coin,fopa_coin,temp,foc_patches,inf_patches,ext_patches)
 
 
 ############
-rm(coord,vecdistan, )
+rm(coord,vecdistan)
 
 
 
