@@ -165,7 +165,8 @@ rm(pOvWi12_2,pOvWi12_3)
 
 #2013 with P/A chasmo and P/A coinf#######
 coinf<-coinf2013
-#patches with coinfected sampled should have at list 2 different MLG, we correct for that
+#patches with coinfected sampled should have at list 2 different MLG, 
+#we correct for that
 coinf[coinf$number_coinf>0 & coinf$number_MLG<2,]$number_MLG<-2
 #then we create a new variable of genotypic diversity index
 coinf<-data.frame(coinf,"Gdiv"=coinf$number_MLG/coinf$number_genotyped)
@@ -191,7 +192,8 @@ rm(chasmo13_2,chasmo13_3)
 
 #2012 with P/A chasmo and P/A coinf#######
 coinf<-coinf2012
-#patches with coinfected sampled should have at list 2 different MLG, we correct for that
+#patches with coinfected sampled should have at list 2 different MLG, 
+#we correct for that
 coinf[coinf$number_coinf>0 & coinf$number_MLG<2,]$number_MLG<-2
 #then we create a new variable of genotypic diversity index
 coinf<-data.frame(coinf,"Gdiv"=coinf$number_MLG/coinf$number_genotyped)
@@ -204,11 +206,8 @@ coinf$chasmoYN[(coinf$chasmoYN)>0]<-1
 coinf$chasmoYN<-as.factor(coinf$chasmoYN)
 coinf<-coinf[!is.na(coinf$AA_F2012),]
 coinf<-coinf[!is.na(coinf$chasmoYN),]
-
-chasmo12<-glmer(chasmoYN~coinfYN+AA_F2012+Gdiv+connec2012+cumulative_sum+(1|SIN_86),family=binomial,data=coinf)
-summary(chasmo12) #problem due to the random factor which capture all the variance
-chasmo12<-glm(chasmoYN~coinfYN+AA_F2012+Gdiv+connec2012+cumulative_sum,family=binomial,data=coinf)
-summary(chasmo12)
+#we build models to test if the presence/absence of coinfection have an 
+#impact on the presence/absence of chasmotecia
 chasmo12_1<-glm(chasmoYN~coinfYN+AA_F2012,family=binomial,data=coinf)
 summary(chasmo12_1)
 chasmo12_2<-glm(chasmoYN~AA_F2012,family=binomial,data=coinf)
@@ -216,99 +215,32 @@ summary(chasmo12_2)
 chasmo12_3<-glm(chasmoYN~coinfYN,family=binomial,data=coinf)
 summary(chasmo12_3)
 anova(chasmo12_2,chasmo12_1,test="Chisq")
-
-#level of chasmothecia against the percentage of coinfection####
-
-#2013#######
-coinf<-coinf2013
-#patches with coinfected sampled should have at list 2 different MLG, we correct for that
-coinf[coinf$number_coinf>0 & coinf$number_MLG<2,]$number_MLG<-2
-#then we create a new variable of genotypic diversity index
-coinf<-data.frame(coinf,"Gdiv"=coinf$number_MLG/coinf$number_genotyped)
-#creation of a new binary variable with or without coinfection
-coinf<-data.frame(coinf,"coinfYN"=coinf$number_coinf)
-coinf$coinfYN[(coinf$coinfYN)>0]<-1
-coinf$coinfYN<-as.factor(coinf$coinfYN)
-coinf<-cbind(coinf,"percoinf"=coinf$number_coinf*100/coinf$number_genotyped)
-coinf<-coinf[!is.na(coinf$AA_F2013),]
-coinf<-coinf[coinf$number_genotyped>2,]
-
-chasmo13<-glmer(chasmo_f_2013~percoinf+AA_F2013+Gdiv+(1|SIN_86),family=poisson,data=coinf)
-summary(chasmo13)
-chasmo13<-glm(chasmoplant2013~coinfYN+AA_F2013,family=gaussian,data=coinf)
-summary(chasmo13)
-
-#2012#######
-coinf<-coinf2012
-#patches with coinfected sampled should have at list 2 different MLG, we correct for that
-coinf[coinf$number_coinf>0 & coinf$number_MLG<2,]$number_MLG<-2
-#then we create a new variable of genotypic diversity index
-coinf<-data.frame(coinf,"Gdiv"=coinf$number_MLG/coinf$number_genotyped)
-#creation of a new binary variable with or without coinfection
-coinf<-data.frame(coinf,"coinfYN"=coinf$number_coinf)
-coinf$coinfYN[(coinf$coinfYN)>0]<-1
-coinf$coinfYN<-as.factor(coinf$coinfYN)
-coinf<-cbind(coinf,"percoinf"=coinf$number_coinf*100/coinf$number_genotyped)
-coinf<-coinf[!is.na(coinf$AA_F2012),]
-coinf<-coinf[coinf$number_genotyped>2,]
-
-chasmo12<-glmer(chasmo_f_2012~percoinf+AA_F2012+Gdiv+(1|SIN_86),family=poisson,data=coinf)
-summary(chasmo12)
-
-
-###############################################################################
-#Is the number of MLG affected by connectivity?
-###############################################################################
-
-plot(table(coinf4corr$number_MLG))
-nbMLG<-glm(number_MLG~percoinf+connec2012+Area_real+cumulative_sum,family=poisson,data=coinf4corr)
-summary(nbMLG)
-nbMLG<-glm(number_MLG~percoinf+Area_real,family=poisson,data=coinf4corr)
-summary(nbMLG)
-visreg(nbMLG,"Area_real",scale="response",jitter=TRUE,
-       xlab="Patche's Area",ylab="Number MLG")
-visreg(nbMLG,"percoinf",scale="response",jitter=TRUE,
-       xlab="Percentage of coinfection",ylab="Number MLG")
-
-plot(table(coinf4corr$number_pure_new))
-nbnewMLG<-glm(number_pure_new~percoinf+Area_real+connec2012+cumulative_sum,family=poisson,data=coinf4corr)
-summary(nbnewMLG)
-nbnewMLG<-glm(number_pure_new~percoinf+Area_real+cumulative_sum,family=poisson,data=coinf4corr)
-summary(nbnewMLG)
-visreg(nbnewMLG,"Area_real",scale="response",jitter=TRUE,
-       xlab="Patche's Area",ylab="Number MLG")
-visreg(nbnewMLG,"percoinf",scale="response",jitter=TRUE,
-       xlab="Percentage of coinfection",ylab="Number MLG")
-visreg(nbnewMLG,"cumulative_sum",scale="response",jitter=TRUE,
-       xlab="Consecutive years of mildew",ylab="Number MLG")
-
-
-#is this the right way of doing it: 
-nbMLG<-glm(number_MLG~percoinf+connec2012+Area_real+cumulative_sum+offset(log(number_genotyped)) ,family=poisson,data=coinf4corr)
-summary(nbMLG)
-
-
+rm(chasmo12_2,chasmo12_3)
 
 
 ###############################################################################
 #Effect of coinfection on the production of new genotypes the following year
 ###############################################################################
 
+#we first merge the data of 2012 and 2013
 datanewgeno<-merge(coinf2012,coinf2013,by="patche_ID")
 datanewgeno<-datanewgeno[datanewgeno$number_genotyped.x>2,]
-datanewgeno<-cbind(datanewgeno,"percoinf12"=datanewgeno$number_coinf.x*100/datanewgeno$number_genotyped.x)
-datanewgeno2<-datanewgeno[!is.na(datanewgeno$coinr2012),]
+datanewgeno<-cbind(datanewgeno,"percoinf12"=datanewgeno$number_coinf.x*100/
+                     datanewgeno$number_genotyped.x)
 
-modnewgeno<-glm(number_pure_new.y~percoinf12+chasmoplant2012.x+connec2012.x+coinr2012,
-                family=poisson,data=datanewgeno)
+#we start to explore the model with the following explanatory variables: the 
+#percentage of coinfection of the previous year, the prevalence of chasmothecia 
+#in the previous year and the pathogen connectivity in the previous year. 
+#the response response variable is the number of MLG observed in the patch 
+#that were not present in the previous year
+modnewgeno<-glm(number_pure_new.y~percoinf12+chasmoplant2012.x+connec2012.x,
+                  family=poisson,data=datanewgeno)
 summary(modnewgeno)
-modnewgeno<-glm(number_pure_new.y~percoinf12+connec2012.x+coinr2012,
-                family=poisson,data=datanewgeno)
-summary(modnewgeno)
-modnewgeno<-glm(number_pure_new.y~percoinf12+coinr2012,
+modnewgeno<-glm(number_pure_new.y~percoinf12+connec2012.x,
                 family=poisson,data=datanewgeno)
 summary(modnewgeno)
 
+#we just keep the percentage of coinfection and the connectivity in the model
 modnewgeno_1<-glm(number_pure_new.y~percoinf12+connec2012.x,
                 family=poisson,data=datanewgeno)
 summary(modnewgeno_1)
@@ -318,20 +250,28 @@ summary(modnewgeno_2)
 modnewgeno_3<-glm(number_pure_new.y~connec2012.x,
                   family=poisson,data=datanewgeno)
 summary(modnewgeno_3)
+anova(modnewgeno_3,modnewgeno_1,test="Chisq")
 anova(modnewgeno_2,modnewgeno_1,test="Chisq")
 
-
-#New MLG define at the SIN level (instead of the metapopulation level)
-modnewgeno<-glm(number_pure_new_SIN.y~percoinf12,
-                family=poisson,data=datanewgeno)
-summary(modnewgeno)
-
-visreg(modnewgeno,"percoinf12",scale="response",jitter=TRUE,
+#a plot of the variation of the number of new MLG per patch as a function of 
+#the percentage of coinfection in the same patch the previous year
+visreg(modnewgeno_1,"percoinf12",scale="response",jitter=TRUE,
        xlab="Percentage of coinfection",ylab="New MLG")
 
+#another figure
 breaks<-c(-1,10,20,30,40,50)
 freq.cut<-cut(datanewgeno$percoinf12,breaks)
 boxplot(datanewgeno$number_pure_new.y~freq.cut)
+rm(breaks,freq.cut)
+
+
+###############################################################################
+#END
+###############################################################################
+
+
+
+
 
 
 ###############################################################################
@@ -755,6 +695,59 @@ anova(AA10.coingdiv,AA10.S)
 anova(AA10.coingdiv)
 anova(AA10.coingdiv,AA10.full)
 anova(AA10.full)
+
+
+
+###############################################################################
+#Is the number of MLG affected by connectivity?
+###############################################################################
+
+#2013 preparing the datafile (coinfection %)
+coinf<-coinf2013
+#patches with coinfected sampled should have at list 2 different MLG, 
+#we correct for that
+coinf[coinf$number_coinf>0 & coinf$number_MLG<2,]$number_MLG<-2
+#then we create a new variable of genotypic diversity index
+coinf<-data.frame(coinf,"Gdiv"=coinf$number_MLG/coinf$number_genotyped)
+#creation of a new binary variable with or without coinfection
+coinf<-data.frame(coinf,"coinfYN"=coinf$number_coinf)
+coinf$coinfYN[(coinf$coinfYN)>0]<-1
+coinf$coinfYN<-as.factor(coinf$coinfYN)
+coinf<-cbind(coinf,"percoinf"=coinf$number_coinf*100/coinf$number_genotyped)
+coinf<-coinf[!is.na(coinf$AA_F2013),]
+#we select patches with at least 3 samples
+coinf<-coinf[coinf$number_genotyped>2,]
+
+
+
+plot(table(coinf4corr$number_MLG))
+nbMLG<-glm(number_MLG~percoinf+connec2012+Area_real+cumulative_sum,
+           family=poisson,data=coinf4corr)
+summary(nbMLG)
+nbMLG<-glm(number_MLG~percoinf+Area_real,family=poisson,data=coinf4corr)
+summary(nbMLG)
+visreg(nbMLG,"Area_real",scale="response",jitter=TRUE,
+       xlab="Patche's Area",ylab="Number MLG")
+visreg(nbMLG,"percoinf",scale="response",jitter=TRUE,
+       xlab="Percentage of coinfection",ylab="Number MLG")
+
+plot(table(coinf4corr$number_pure_new))
+nbnewMLG<-glm(number_pure_new~percoinf+Area_real+connec2012+cumulative_sum,family=poisson,data=coinf4corr)
+summary(nbnewMLG)
+nbnewMLG<-glm(number_pure_new~percoinf+Area_real+cumulative_sum,family=poisson,data=coinf4corr)
+summary(nbnewMLG)
+visreg(nbnewMLG,"Area_real",scale="response",jitter=TRUE,
+       xlab="Patche's Area",ylab="Number MLG")
+visreg(nbnewMLG,"percoinf",scale="response",jitter=TRUE,
+       xlab="Percentage of coinfection",ylab="Number MLG")
+visreg(nbnewMLG,"cumulative_sum",scale="response",jitter=TRUE,
+       xlab="Consecutive years of mildew",ylab="Number MLG")
+
+
+#is this the right way of doing it: 
+nbMLG<-glm(number_MLG~percoinf+connec2012+Area_real+cumulative_sum+offset(log(number_genotyped)) ,family=poisson,data=coinf4corr)
+summary(nbMLG)
+
 
 
 
