@@ -5,19 +5,25 @@
 ###############################################################################
 
 #this code is adapted from the repository of Jussi Jousimo: 
-#https://github.com/statguy/MultiLocusGenotype
+#https://github.com/statguy/MultiLocusGenotype. It uses the SpaceTimeModels 
+#package that allows an easier use of INLA to fit spatial and time models in 
+#an R framework
 
 #before using this code, you have to run 'selfout_loadata.R' first
 setwd("~/work/Rfichiers/Githuber/SelfOut_data")
 
-
-if (F) {
-  # Need to install SpaceTime package first
-  library(devtools)
-  install_github("statguy/SpaceTimeModels")
-  reload(inst("SpaceTimeModels"))
-}
+#the "SpaceTimeModels" package wasn't available on CRAN at the time this code 
+#was written. So you have to install the 'devtools' package and install the 
+#package straight from github
+library(devtools)
+install_github("statguy/SpaceTimeModels")
 library(SpaceTimeModels)
+
+
+###############################################################################
+#Compute the distances between every patches
+###############################################################################
+
 
 infections <- read.csv("stat_patch2012corr.txt", sep="\t", fileEncoding="ISO-8859-1")
 

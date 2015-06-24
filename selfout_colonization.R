@@ -16,7 +16,7 @@ library(visreg)
 #Compute the distances between every patches
 ###############################################################################
 
-#to compute the distances between every patches saves some computation time, 
+#Compute the distances between every patches saves some computation time, 
 #because you only compute the distance matrix once. After that, when a distance 
 #matrix between a subset of patches is needed, you just need to select a subset 
 #of the complete distance matrix

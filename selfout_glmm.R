@@ -255,14 +255,26 @@ anova(modnewgeno_2,modnewgeno_1,test="Chisq")
 
 #a plot of the variation of the number of new MLG per patch as a function of 
 #the percentage of coinfection in the same patch the previous year
-visreg(modnewgeno_1,"percoinf12",scale="response",jitter=TRUE,
-       xlab="Percentage of coinfection",ylab="New MLG")
+visreg(modnewgeno_1,"percoinf12",scale="response",lwd=10,font.lab=2,font=2,
+       font.axis=2,xlab="% of coinfection in 2012",line.par=list(col="black"),
+       ylab="Number of new MLG in 2013",bty="l",rug=FALSE,xlim=c(0,100),axes=FALSE)
+box(bty="l",lwd=3)
+axis(1,lwd=3,font=2)
+axis(2,lwd=3,font=2,las=1)
+rug(jitter(datanewgeno$percoinf12,amount=1),col="violetred")
+#transparent colors don't seem to work with 'rug'. In case this is fixed at 
+#some point, here is an example of transparent color: 
+#rgb(208,32,144,alpha=0.3,maxColorValue=255)
+
+#export to a pdf file of 12 x 8 inches
 
 #another figure
 breaks<-c(-1,10,20,30,40,50)
 freq.cut<-cut(datanewgeno$percoinf12,breaks)
 boxplot(datanewgeno$number_pure_new.y~freq.cut)
-rm(breaks,freq.cut)
+
+#cleaning the environment
+rm(breaks,freq.cut,modnewgeno_2,modnewgeno_3)
 
 
 ###############################################################################
