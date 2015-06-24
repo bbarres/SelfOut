@@ -25,13 +25,15 @@ library(SpaceTimeModels)
 ###############################################################################
 
 
-infections <- read.csv("stat_patch2012corr.txt", sep="\t", fileEncoding="ISO-8859-1")
+infections <- coinf2012
 
 # Remove missing data and scale covariates
-complete <- complete.cases(infections[,c("PLM2_Sept2012","AA_F2012","Distance_to_shore","PA_2011")])
+complete <- complete.cases(infections[,c("PLM2_Sept2012","AA_F2012",
+                                         "Distance_to_shore","PA_2011")])
 infections <- infections[complete,]
+infections$PA_2011 <- as.numeric(infections$PA_2011)
 infections[,c("PLM2_Sept2012","AA_F2012","Distance_to_shore","PA_2011")] <- scale(infections[,c("PLM2_Sept2012","AA_F2012","Distance_to_shore","PA_2011")])
-coords <- sp::SpatialPoints(infections[,c("Longitude","Latitude")]);
+coords <- sp::SpatialPoints(infections[,c("Longitude","Latitude")])
 #infections$number_MLG <- infections$number_MLG - 1
 
 # Construct estimation mesh
