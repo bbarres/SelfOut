@@ -24,7 +24,6 @@ library(SpaceTimeModels)
 #Compute the distances between every patches
 ###############################################################################
 
-
 infections <- coinf2012
 
 # Remove missing data and scale covariates
