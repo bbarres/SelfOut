@@ -9,6 +9,9 @@ The R code for the article on recombination of Podosphaera plantaginis in the Al
 >This map is extracted from the 2015 article of **_Susi et al_**: [Co-infection alters population dynamics of infectious disease](http://www.nature.com/ncomms/2015/150108/ncomms6975/full/ncomms6975.html) published in [Nature Communications](http://www.nature.com/ncomms/index.html)
 
 
+---
+
+
 ##List of the different scripts
 
   * **selfout_importdata.R:** script that is used to import and format the raw data. This script is for "internal" use only. It creates the input datafile that are used in the 'selfout_loadata.R' script
