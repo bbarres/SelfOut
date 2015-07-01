@@ -3,6 +3,6 @@ The R code for the article on recombination of Podosphaera plantaginis in the Al
 
 ##List of the different scripts
 
-  * **selfout_importdata.R:** script that is used to import the rawdata into 
+  * **selfout_importdata.R:** script that is used to import and format the data so it can be processed. This script is for "internal" use only. It creates the input datafile that are used in the 'selfout_loadata.R' script 
   * **selfout_loadata.R:** script you have to run before any other scripts (except for selfout_importdata.R)
 
