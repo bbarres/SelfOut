@@ -1,6 +1,7 @@
 # SelfOut
 The R code for the article on recombination of Podosphaera plantaginis in the Aland Islands metapopulation. 
 
+---
 
 ![alt text](http://www.nature.com/ncomms/2015/150108/ncomms6975/images/ncomms6975-f3.jpg "A map of coinfection in Aland in 2012")
 
