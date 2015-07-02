@@ -28,6 +28,11 @@ The R code for the article on recombination of *Podosphaera plantaginis* in the 
   * **selfout_distintrapatch.R:** script to compute the mean distances between samples within patch, for every patch.  
 
 
+```{r}
+summary(cars)
+
+```
+
 ---
 
 ![alt text](http://googledrive.com/host/0B-FIusWb7o6PfjdhbUJncm1mdjM1NnQ1TWl6MHhZUnNRZjd6RkUtUVo5WlFsVURTV0lvQjA/Plantago_plant_model2.png "A drawing of a Plantago lanceolata")
