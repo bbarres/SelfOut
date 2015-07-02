@@ -24,3 +24,15 @@ The R code for the article on recombination of *Podosphaera plantaginis* in the 
   * **selfout_samplingmap.R:** script to plot the sampling maps for each year of the survey (2010, 2011, 2012 and 2013)
   * **selfout_glm.R:** script for the generalized linear model used to analysis the impact of coinfection on different life traits of *P. plantaginis*
 
+
+
+---
+
+![alt text](https://drive.google.com/file/d/0B-FIusWb7o6PdmM2LUJHaTMxcHM/view?usp=sharing "A drawing of a *Plantago lanceolata*")
+
+
+---
+
+
+
+
