@@ -28,7 +28,7 @@ The R code for the article on recombination of *Podosphaera plantaginis* in the 
 
 ---
 
-![alt text](https://drive.google.com/file/d/0B-FIusWb7o6PdmM2LUJHaTMxcHM/view?usp=sharing "A drawing of a *Plantago lanceolata*")
+![alt text](https://drive.google.com/open?id=0B-FIusWb7o6PdmM2LUJHaTMxcHM "A drawing of a *Plantago lanceolata*")
 
 
 ---
