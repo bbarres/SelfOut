@@ -11,7 +11,7 @@ The R code for the article on recombination of *Podosphaera plantaginis* in the 
 ---
 
 
->This map is extracted from the 2015 article of **_Susi et al_**: [Co-infection alters population dynamics of infectious disease](http://www.nature.com/ncomms/2015/150108/ncomms6975/full/ncomms6975.html) published in [*Nature Communications*](http://www.nature.com/ncomms/index.html). *(This will be updated as soon as a newer figure is available)* 
+>This map is extracted from the 2015 article of **_Susi et al_**: [Co-infection alters population dynamics of infectious disease](http://www.nature.com/ncomms/2015/150108/ncomms6975/full/ncomms6975.html) published in [*Nature Communications*](http://www.nature.com/ncomms/index.html). *(There will soon be a different and newer map here)* 
 
 
 
