@@ -26,6 +26,7 @@ The R code for the article on recombination of *Podosphaera plantaginis* in the 
   * **selfout_samplingmap.R:** script to plot the sampling maps for each year of the survey (2010, 2011, 2012 and 2013). 
   * **selfout_barplot.R:** script for the barplot figures that show several aspect of the consequence of coinfection on the disease dynamic of the ribwort powdery mildew. 
   * **selfout_distintrapatch.R:** script to compute the mean distances between samples within patch, for every patch.  
+  * **selfout_diversitymap.R:** script for producing map of the Allelic richness and Genotypic richness in Åland patches. 
 
 
 ---
