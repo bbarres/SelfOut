@@ -5,13 +5,13 @@ The R code for the article on recombination of *Podosphaera plantaginis* in the 
 
 ---
 
-![alt text](http://www.nature.com/ncomms/2015/150108/ncomms6975/images/ncomms6975-f3.jpg "A map of coinfection in Aland in 2012")
+![alt text](http://googledrive.com/host/0B-FIusWb7o6PfjdhbUJncm1mdjM1NnQ1TWl6MHhZUnNRZjd6RkUtUVo5WlFsVURTV0lvQjA/CoSinInf1213.png "A map of coinfection in Aland in 2012")
 
 
 ---
 
 
->This map is extracted from the 2015 article of **_Susi et al_**: [Co-infection alters population dynamics of infectious disease](http://www.nature.com/ncomms/2015/150108/ncomms6975/full/ncomms6975.html) published in [*Nature Communications*](http://www.nature.com/ncomms/index.html). *(There will soon be a different and newer map here)* 
+>These maps show the samples that were found to be coinfected or not in 2012 and 2013. This study is a follow up of the 2015 article of **_Susi et al_**: [Co-infection alters population dynamics of infectious disease](http://www.nature.com/ncomms/2015/150108/ncomms6975/full/ncomms6975.html) published in [*Nature Communications*](http://www.nature.com/ncomms/index.html).  
 
 
 
