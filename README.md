@@ -4,9 +4,8 @@ The R code for the article on recombination of a plant pathogenic fungus, *Podos
 
 ---
 
-![alt text](http://googledrive.com/host/0B-FIusWb7o6PfjdhbUJncm1mdjM1NnQ1TWl6MHhZUnNRZjd6RkUtUVo5WlFsVURTV0lvQjA/CoSinInf1213.png "A map of coinfection in Aland in 2012")
 
-       2012               |           2013          
+       2012                |           2013          
 :-------------------------:|:-------------------------:
 ![alt text](http://googledrive.com/host/0B-FIusWb7o6PfjdhbUJncm1mdjM1NnQ1TWl6MHhZUnNRZjd6RkUtUVo5WlFsVURTV0lvQjA/Samp12.png "A map of coinfected and single infected samples in 2012")  |  ![alt text](http://googledrive.com/host/0B-FIusWb7o6PfjdhbUJncm1mdjM1NnQ1TWl6MHhZUnNRZjd6RkUtUVo5WlFsVURTV0lvQjA/Samp13.png "A map of coinfected and single infected samples in 2013")
 
