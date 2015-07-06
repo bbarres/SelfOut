@@ -20,7 +20,7 @@ The R code for the article on recombination of a plant pathogenic fungus, *Podos
   * **selfout_loadata.R:** script you have to run before any other scripts (except for `selfout_importdata.R`).
   * **selfout_glm.R:** script for the generalized linear model used to analysis the impact of coinfection on different life traits of *P. plantaginis*.
   * **selfout_colonization.R:** script for analyzing colonization of patches during the epidemic (*i.e.* intra epidemic season).
-  * **selfout_monoMLG.R:** script to identify patches with one MLG that overwintered successfully and check if the MLG is found in the same patch the next year. The patches with several MLG are also investigated: we check which MLG overwintered successfully and which don't. 
+  * **selfout_monoMLG.R:** script to identify patches with a unique MLG that overwintered successfully and to check if the MLG is found in the same patch the next year. The patches with several MLG are also investigated: we check which MLG overwintered successfully and which didn't. 
   * **selfout_LD_subsample.R:** script to split the data set in different subpopulations so that LD tests can be done taking into account the possible geographical structuration of the populations.
   * **selfout_samplingmap.R:** script to plot the sampling maps for each year of the survey (2010, 2011, 2012 and 2013). 
   * **selfout_barplot.R:** script for the barplot figures that show several aspect of the consequence of coinfection on the disease dynamic of the ribwort powdery mildew. 
@@ -34,7 +34,7 @@ The R code for the article on recombination of a plant pathogenic fungus, *Podos
 :-------------------------:|:-------------------------:
 ![alt text](http://googledrive.com/host/0B-FIusWb7o6PfjdhbUJncm1mdjM1NnQ1TWl6MHhZUnNRZjd6RkUtUVo5WlFsVURTV0lvQjA/CoinRisk12.png "Relative risk maps of coinfection vs infection in 2012. This map was obtained using 'spatstat' R package")  |  ![alt text](http://googledrive.com/host/0B-FIusWb7o6PfjdhbUJncm1mdjM1NnQ1TWl6MHhZUnNRZjd6RkUtUVo5WlFsVURTV0lvQjA/CoinRisk13.png "Relative risk maps of coinfection vs infection in 2013. This map was obtained using 'spatstat' R package")
 
-
+>These maps show the relative risk to find a coinfected sample in the metapopulation of the plant pathogen *P. plantaginis*. The darker the red, the higher the probability to find a plant with multiple strains on a leaf. These maps show that coinfection is found everywhere in Åland Islands, that there is a lot of variation of the prevalence of coinfection across the system and that there is also some temporal variation of the distribution of coinfection from one year to another. 
 
 
 ---
