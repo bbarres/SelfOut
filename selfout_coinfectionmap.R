@@ -92,7 +92,7 @@ geno2013t[(geno2013t$nb_snp_het==0),"nb_snp_het"]<-"PURE"
 
 
 #change the default value of the resolution of 'spatstat' package
-spatstat.options(npixel=c(nx=500, ny=500)) #default values are 100,100
+spatstat.options(npixel=c(nx=750, ny=750)) #default values are 100,100
 
 
 ###############################################################################
@@ -132,25 +132,33 @@ par(op)
 #computing and mapping the relative risk surface of coinfection
 ###############################################################################
 
+#Maps for 2012 including
+
 myPal<-colorRampPalette(brewer.pal(9,"Blues"))(25)
+
 #map of the estimate of the intensity function of the sampling process
 #coordinates of the sampling points
 samppoint<-cbind("x"=geno2012t$long_plant,"y"=geno2012t$lat_plant)
-samppoint<-samppoint[complete.cases(samppoint),] #removing points without coordinates
-samppointppp <- ppp(samppoint[,1], samppoint[,2], window=boundary) 
-kdensity<-density.ppp(samppointppp, 1268,diggle=TRUE)
-breakdens<-plot(kdensity,col=myPal)
+#removing points without coordinates
+samppoint<-samppoint[complete.cases(samppoint),]
+
+samppoint<-ppp(samppoint[,1], samppoint[,2], window=boundary) 
+kdensityppp<-density.ppp(samppoint, 1157,diggle=TRUE)
+breakdens<-plot(kdensityppp,col=myPal)
 breakdens<-attr(breakdens,"stuff")$breaks[c(1,5,10,15,20,25)]
-breakdens<-as.character(round(round(breakdens*100000000,digits=0)/1000,digits=1))
+breakdens<-as.character(round(round(breakdens*100000000,digits=0)/1000,
+                              digits=1))
 #computing the relative risk surface of coinfection compare to pure infection
-purecoinf<-data.frame("x"=geno2012t$long_plant,"y"=geno2012t$lat_plant,
+purecoinf2012<-data.frame("x"=geno2012t$long_plant,"y"=geno2012t$lat_plant,
                       "marks"=as.factor(geno2012t$nb_snp_het))
-purecoinf<-purecoinf[complete.cases(purecoinf),] #removing points with missing things
-purecoinfppp <- ppp(purecoinf[,1], purecoinf[,2], window=boundary,marks=purecoinf[,3]) 
-prisk <- relrisk(purecoinfppp, 1268,at="pixels",diggle=TRUE,case=1)
-breakcoin<-plot(prisk,col=myPal)
-breakcoin<-attr(breakcoin,"stuff")$breaks[c(1,5,10,15,20,25)]
-breakcoin<-as.character(round(breakcoin,digits=1))
+#removing points with missing things
+purecoinf2012<-purecoinf2012[complete.cases(purecoinf2012),]
+purecoinfppp2012<-ppp(purecoinf2012[,1], purecoinf2012[,2],
+                      window=boundary,marks=purecoinf2012[,3]) 
+prisk2012<-relrisk(purecoinfppp2012,1157,at="pixels",diggle=TRUE,case=1)
+breakcoin2012<-plot(prisk2012,col=myPal)
+breakcoin2012<-attr(breakcoin2012,"stuff")$breaks[c(1,5,10,15,20,25)]
+breakcoin2012<-as.character(round(breakcoin2012,digits=1))
 
 #code for the map
 op<-par(mfrow=c(1,2))
@@ -164,108 +172,145 @@ plot(Aland,add=TRUE)
 scalebar(c(86000,6667000),20000,"km")
 color.legend(165000,6670000,167000,6715000,col.labels,
              myPal,gradient="y",align="rb")
-points(purecoinf[,1:2],pch=19,cex=0.3,col=grey(0.5))
+points(purecoinf2012[,1:2],pch=19,cex=0.3,col=grey(0.5))
 #mapping of the relative risk surface of coinfection compare to pure infection
-col.labels<-breakcoin
+col.labels<-breakcoin2012
 myPal<-colorRampPalette(brewer.pal(9,"Reds"))(25)
 plot(Aland,lty=0)
 title(main="Map of the relative risk surface of coinfection vs infection")
-plot(prisk,col=myPal,add=TRUE)
+plot(prisk2012,col=myPal,add=TRUE)
 plot(Aland,add=TRUE)
-points(purecoinf[,1:2],pch=19,cex=0.3,col=grey(0.5))
+points(purecoinf2012[,1:2],pch=19,cex=0.3,col=grey(0.5))
 scalebar(c(86000,6667000),20000,"km")
 color.legend(165000,6670000,167000,6715000,col.labels,
              myPal,gradient="y",align="rb")
 par(op) #export the map 32 x 10 inches
 
-#map send on the 150514 for the first version of the draft
-col.labels<-breakcoin
-myPal<-colorRampPalette(brewer.pal(9,"Reds"))(25)
+#map with the color scale not starting as white (so we can distinguish between 
+#no data and no coinfection)
+col.labels<-breakcoin2012
+myPal<-colorRampPalette(brewer.pal(9,"Reds"))(25)[3:25]
 plot(Aland,lty=0)
-#title(main="Map of the relative risk surface of coinfection vs infection")
-plot(prisk,col=myPal,add=TRUE)
+title(main="Map of the relative risk surface of coinfection vs infection in 2012")
+plot(prisk2012,col=myPal,add=TRUE)
 plot(Aland,add=TRUE,lwd=3)
-#points(purecoinf[,1:2],pch=19,cex=1,col=grey(0.3))
-#points(purecoinf[,1:2],pch=19,cex=1.2,col=colours()[81])
-points(purecoinf[,1:2],pch=19,cex=1.2,col=grey(0.2))
-#scalebar(c(86000,6667000),20000,"km")
-scalebar(c(86000,6667000),20000,"km",division.cex=2)
+#adding the sampling point
+points(purecoinf2012[,1:2],pch=19,cex=1.2,col=grey(0.2))
+#adding the scalebar
+scalebar(c(86000,6667000),20000,"km",division.cex=1.5)
 color.legend(165000,6670000,167000,6715000,col.labels,
-             myPal,gradient="y",align="rb",cex=2) #export the map 16 x 10 inches or 1600 x 1000 for jpeg
-
-#map send on the 180814 for the revised version of the manuscript
-#first changing the scale so that close to 0% aren't white like no-data
-col.labels<-breakcoin
-myPal<-colorRampPalette(brewer.pal(9,"Reds"))(25)[4:25]
-plot(Aland,lty=0)
-#title(main="Map of the relative risk surface of coinfection vs infection")
-plot(prisk,col=myPal,add=TRUE)
-plot(Aland,add=TRUE,lwd=3)
-#points(purecoinf[,1:2],pch=19,cex=1,col=grey(0.3))
-#points(purecoinf[,1:2],pch=19,cex=1.2,col=colours()[81])
-points(purecoinf[,1:2],pch=19,cex=1.2,col=grey(0.2))
-#scalebar(c(86000,6667000),20000,"km")
-scalebar(c(86000,6667000),20000,"km",division.cex=2)
-color.legend(165000,6670000,167000,6715000,col.labels,
-             myPal,gradient="y",align="rb",cex=2) #export the map 16 x 10 inches or 1600 x 1000 for jpeg
-
-#second changing the colour of no-data so that they are grey and then different than 0% coinfection
-col.labels<-breakcoin
-myPal<-colorRampPalette(brewer.pal(9,"Reds"))(25)
-plot(Aland,lty=0)
-#title(main="Map of the relative risk surface of coinfection vs infection")
-plot(prisk,col=myPal,add=TRUE)
-plot(Aland,add=TRUE,lwd=3)
-plot(Aland_sup,add=TRUE,lwd=3, col=grey(0.8))
-#points(purecoinf[,1:2],pch=19,cex=1,col=grey(0.3))
-#points(purecoinf[,1:2],pch=19,cex=1.2,col=colours()[81])
-points(purecoinf[,1:2],pch=19,cex=1.2,col=grey(0.2))
-#scalebar(c(86000,6667000),20000,"km")
-scalebar(c(86000,6667000),20000,"km",division.cex=2)
-color.legend(165000,6670000,167000,6715000,col.labels,
-             myPal,gradient="y",align="rb",cex=2) #export the map 16 x 10 inches or 1600 x 1000 for jpeg
-
-#third, changing the colour scale using a divergent scale instead of one gradient color
-col.labels<-breakcoin
-myPal<- colorRampPalette(brewer.pal(11,"Spectral"))(25)[25:1]
-plot(Aland,lty=0)
-#title(main="Map of the relative risk surface of coinfection vs infection")
-plot(prisk,col=myPal,add=TRUE)
-plot(Aland,add=TRUE,lwd=3)
-#points(purecoinf[,1:2],pch=19,cex=1,col=grey(0.3))
-#points(purecoinf[,1:2],pch=19,cex=1.2,col=colours()[81])
-points(purecoinf[,1:2],pch=19,cex=1.2,col=grey(0.2))
-#scalebar(c(86000,6667000),20000,"km")
-scalebar(c(86000,6667000),20000,"km",division.cex=2)
-color.legend(165000,6670000,167000,6715000,col.labels,
-             myPal,gradient="y",align="rb",cex=2) #export the map 16 x 10 inches or 1600 x 1000 for jpeg
+             myPal,gradient="y",align="rb",cex=2) 
+#export the map 16 x 10 inches or 1600 x 1000 for jpeg
 
 
-#Thumbnail image code
-Aland_limlim<-Aland[Aland$RECNO %in% c(1,4,5,12,15,21,23,25,29,34,35,39,40,47,52),]
-boundary<-as(as(Aland_limlim, "SpatialPolygons"), "owin")
-spatstat.options(npixel=c(nx=500, ny=500)) #default values are 100,100
-samppoint<-cbind("x"=geno2012t$long_plant,"y"=geno2012t$lat_plant)
-samppoint<-samppoint[complete.cases(samppoint),] #removing points without coordinates
-samppointppp <- ppp(samppoint[,1], samppoint[,2], window=boundary) 
-kdensity<-density.ppp(samppointppp, 1268,diggle=TRUE)
+#Maps for 2013 including
+
 myPal<-colorRampPalette(brewer.pal(9,"Blues"))(25)
-breakdens<-plot(kdensity,col=myPal)
-breakdens<-attr(breakdens,"stuff")$breaks[c(1,5,10,15,20,25)]
-breakdens<-as.character(round(round(breakdens*100000000,digits=0)/1000,digits=1))
-#computing the relative risk surface of coinfection compare to pure infection
-purecoinf<-data.frame("x"=geno2012t$long_plant,"y"=geno2012t$lat_plant,
-                      "marks"=as.factor(geno2012t$nb_snp_het))
-purecoinf<-purecoinf[complete.cases(purecoinf),] #removing points with missing things
-purecoinfppp <- ppp(purecoinf[,1], purecoinf[,2], window=boundary,marks=purecoinf[,3]) 
-prisk <- relrisk(purecoinfppp, 1268,at="pixels",diggle=TRUE,case=1)
-breakcoin<-plot(prisk,col=myPal)
-breakcoin<-attr(breakcoin,"stuff")$breaks[c(1,5,10,15,20,25)]
-breakcoin<-as.character(round(breakcoin,digits=1))
-col.labels<-breakcoin
-myPal<- colorRampPalette(brewer.pal(11,"Spectral"))(25)[25:1]
-plot(Aland_limlim,lty=0)
-#title(main="Map of the relative risk surface of coinfection vs infection")
-plot(prisk,col=myPal,add=TRUE)
-plot(Aland_limlim,add=TRUE,lwd=3)
 
+#map of the estimate of the intensity function of the sampling process
+#coordinates of the sampling points
+samppoint<-cbind("x"=geno2013t$long_plant,"y"=geno2013t$lat_plant)
+#removing points without coordinates
+samppoint<-samppoint[complete.cases(samppoint),]
+
+samppoint<-ppp(samppoint[,1], samppoint[,2], window=boundary) 
+kdensityppp<-density.ppp(samppoint, 1251,diggle=TRUE)
+breakdens<-plot(kdensityppp,col=myPal)
+breakdens<-attr(breakdens,"stuff")$breaks[c(1,5,10,15,20,25)]
+breakdens<-as.character(round(round(breakdens*100000000,digits=0)/1000,
+                              digits=1))
+#computing the relative risk surface of coinfection compare to pure infection
+purecoinf2013<-data.frame("x"=geno2013t$long_plant,"y"=geno2013t$lat_plant,
+                          "marks"=as.factor(geno2013t$nb_snp_het))
+#removing points with missing things
+purecoinf2013<-purecoinf2013[complete.cases(purecoinf2013),]
+purecoinfppp2013<-ppp(purecoinf2013[,1], purecoinf2013[,2],
+                      window=boundary,marks=purecoinf2013[,3]) 
+prisk2013<-relrisk(purecoinfppp2013,1251,at="pixels",diggle=TRUE,case=1)
+breakcoin2013<-plot(prisk2013,col=myPal)
+breakcoin2013<-attr(breakcoin2013,"stuff")$breaks[c(1,5,10,15,20,25)]
+breakcoin2013<-as.character(round(breakcoin2013,digits=1))
+
+#code for the map
+op<-par(mfrow=c(1,2))
+#map of the estimate of the intensity function of the sampling process
+col.labels<-paste(breakdens,"e-02")
+myPal<-colorRampPalette(brewer.pal(9,"Blues"))(25)
+plot(Aland,lty=0)
+title(main="Map of the estimate of the intensity function of the sampling process")
+plot(kdensity,col=myPal,add=TRUE)
+plot(Aland,add=TRUE)
+scalebar(c(86000,6667000),20000,"km")
+color.legend(165000,6670000,167000,6715000,col.labels,
+             myPal,gradient="y",align="rb")
+points(purecoinf2013[,1:2],pch=19,cex=0.3,col=grey(0.5))
+#mapping of the relative risk surface of coinfection compare to pure infection
+col.labels<-breakcoin2013
+myPal<-colorRampPalette(brewer.pal(9,"Reds"))(25)
+plot(Aland,lty=0)
+title(main="Map of the relative risk surface of coinfection vs infection")
+plot(prisk2013,col=myPal,add=TRUE)
+plot(Aland,add=TRUE)
+points(purecoinf2013[,1:2],pch=19,cex=0.3,col=grey(0.5))
+scalebar(c(86000,6667000),20000,"km")
+color.legend(165000,6670000,167000,6715000,col.labels,
+             myPal,gradient="y",align="rb")
+par(op) #export the map 32 x 10 inches
+
+#map with the color scale not starting as white (so we can distinguish between 
+#no data and no coinfection)
+col.labels<-breakcoin2013
+myPal<-colorRampPalette(brewer.pal(9,"Reds"))(25)[3:25]
+plot(Aland,lty=0)
+title(main="Map of the relative risk surface of coinfection vs infection in 2013")
+plot(prisk2013,col=myPal,add=TRUE)
+plot(Aland,add=TRUE,lwd=3)
+#adding the sampling point
+points(purecoinf2013[,1:2],pch=19,cex=1.2,col=grey(0.2))
+#adding the scalebar
+scalebar(c(86000,6667000),20000,"km",division.cex=1.5)
+color.legend(165000,6670000,167000,6715000,col.labels,
+             myPal,gradient="y",align="rb",cex=2) 
+#export the map 16 x 10 inches or 1600 x 1000 for jpeg
+
+
+###############################################################################
+#Map of the two relative risk surface in 2012 and 2013
+###############################################################################
+
+op<-par(mfrow=c(1,2))
+
+#map with the color scale not starting as white (so we can distinguish between 
+#no data and no coinfection)
+col.labels<-breakcoin2012
+myPal<-colorRampPalette(brewer.pal(9,"Reds"))(25)[3:25]
+plot(Aland,lty=0)
+title(main="Map of the relative risk surface of coinfection vs infection in 2012")
+plot(prisk2012,col=myPal,add=TRUE)
+plot(Aland,add=TRUE,lwd=3)
+#adding the sampling point
+points(purecoinf2012[,1:2],pch=19,cex=1.2,col=grey(0.2))
+#adding the scalebar
+scalebar(c(86000,6667000),20000,"km",division.cex=1.5)
+color.legend(165000,6670000,167000,6715000,col.labels,
+             myPal,gradient="y",align="rb",cex=2) 
+
+col.labels<-breakcoin2013
+myPal<-colorRampPalette(brewer.pal(9,"Reds"))(25)[3:25]
+plot(Aland,lty=0)
+title(main="Map of the relative risk surface of coinfection vs infection in 2013")
+plot(prisk2013,col=myPal,add=TRUE)
+plot(Aland,add=TRUE,lwd=3)
+#adding the sampling point
+points(purecoinf2013[,1:2],pch=19,cex=1.2,col=grey(0.2))
+#adding the scalebar
+scalebar(c(86000,6667000),20000,"km",division.cex=1.5)
+color.legend(165000,6670000,167000,6715000,col.labels,
+             myPal,gradient="y",align="rb",cex=2) 
+
+par(op)
+
+
+###############################################################################
+#END
+###############################################################################
