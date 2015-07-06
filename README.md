@@ -1,6 +1,10 @@
 #SelfOut
 
-![alt text](http://googledrive.com/host/0B-FIusWb7o6PfjdhbUJncm1mdjM1NnQ1TWl6MHhZUnNRZjd6RkUtUVo5WlFsVURTV0lvQjA/CoinRisk1213.png "Relative risk maps of coinfection vs infection in 2012 and 2013. These maps were obtained using 'spatstat' R package")
+:       2012              :|:           2013          :
+:-------------------------:|:-------------------------:
+![alt text]((http://googledrive.com/host/0B-FIusWb7o6PfjdhbUJncm1mdjM1NnQ1TWl6MHhZUnNRZjd6RkUtUVo5WlFsVURTV0lvQjA/CoinRisk12.png "Relative risk maps of coinfection vs infection in 2012. This map was obtained using 'spatstat' R package"))  |  ![alt text]((http://googledrive.com/host/0B-FIusWb7o6PfjdhbUJncm1mdjM1NnQ1TWl6MHhZUnNRZjd6RkUtUVo5WlFsVURTV0lvQjA/CoinRisk13.png "Relative risk maps of coinfection vs infection in 2013. This map was obtained using 'spatstat' R package"))
+
+![](http://googledrive.com/host/0B-FIusWb7o6PfjdhbUJncm1mdjM1NnQ1TWl6MHhZUnNRZjd6RkUtUVo5WlFsVURTV0lvQjA/CoinRisk1213.png "Relative risk maps of coinfection vs infection in 2012 and 2013. These maps were obtained using 'spatstat' R package")
 
 
 
