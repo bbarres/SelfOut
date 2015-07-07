@@ -167,7 +167,7 @@ col.labels<-paste(breakdens,"e-02")
 myPal<-colorRampPalette(brewer.pal(9,"Blues"))(25)
 plot(Aland,lty=0)
 title(main="Map of the estimate of the intensity function of the sampling process")
-plot(kdensity,col=myPal,add=TRUE)
+plot(kdensityppp,col=myPal,add=TRUE)
 plot(Aland,add=TRUE)
 scalebar(c(86000,6667000),20000,"km")
 color.legend(165000,6670000,167000,6715000,col.labels,
@@ -237,8 +237,9 @@ op<-par(mfrow=c(1,2))
 col.labels<-paste(breakdens,"e-02")
 myPal<-colorRampPalette(brewer.pal(9,"Blues"))(25)
 plot(Aland,lty=0)
-title(main="Map of the estimate of the intensity function of the sampling process")
-plot(kdensity,col=myPal,add=TRUE)
+title(main=
+      "Map of the estimate of the intensity function of the sampling process")
+plot(kdensityppp,col=myPal,add=TRUE)
 plot(Aland,add=TRUE)
 scalebar(c(86000,6667000),20000,"km")
 color.legend(165000,6670000,167000,6715000,col.labels,
@@ -255,7 +256,8 @@ points(purecoinf2013[,1:2],pch=19,cex=0.3,col=grey(0.5))
 scalebar(c(86000,6667000),20000,"km")
 color.legend(165000,6670000,167000,6715000,col.labels,
              myPal,gradient="y",align="rb")
-par(op) #export the map 32 x 10 inches
+par(op)
+#export the map 32 x 10 inches
 
 #map with the color scale not starting as white (so we can distinguish between 
 #no data and no coinfection)
@@ -309,6 +311,15 @@ color.legend(165000,6670000,167000,6715000,col.labels,
              myPal,gradient="y",align="rb",cex=2) 
 
 par(op)
+
+
+###############################################################################
+#Cleaning the environment
+###############################################################################
+
+rm(Aland_sup,Aland_lim,myPal,samppoint,purecoinfppp2012,purecoinfppp2013,
+   kdensityppp,breakdens,breakcoin2012,breakcoin2013,col.labels,boundary,
+   purecoinf2012,purecoinf2013,prisk2012,prisk2013)
 
 
 ###############################################################################
