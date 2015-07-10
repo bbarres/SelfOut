@@ -21,17 +21,27 @@ library(SpaceTimeModels)
 
 
 ###############################################################################
-#Compute the distances between every patches
+#Factors affecting the number of MLG
 ###############################################################################
 
 infections <- coinf2012
 
 # Remove missing data and scale covariates
-complete <- complete.cases(infections[,c("PLM2_Sept2012","AA_F2012",
-                                         "Distance_to_shore","PA_2011")])
+complete <- complete.cases(infections[,c("PLM2_Sept2012","number_coinf",
+                                         "cumulative_sum","connec2012",
+                                         "road_PA","Distance_to_shore",
+                                         "PA_2011","number_MLG","AA_F2012")])
+length(complete)
 infections <- infections[complete,]
+
 infections$PA_2011 <- as.numeric(infections$PA_2011)
-infections[,c("PLM2_Sept2012","AA_F2012","Distance_to_shore","PA_2011")] <- scale(infections[,c("PLM2_Sept2012","AA_F2012","Distance_to_shore","PA_2011")])
+infections[,c("PLM2_Sept2012","number_coinf",
+              "cumulative_sum","connec2012",
+              "road_PA","Distance_to_shore",
+              "PA_2011","AA_F2012")] <- infections[,c("PLM2_Sept2012","number_coinf",
+                                                      "cumulative_sum","connec2012",
+                                                      "road_PA","Distance_to_shore",
+                                                      "PA_2011","AA_F2012")]
 coords <- sp::SpatialPoints(infections[,c("Longitude","Latitude")])
 #infections$number_MLG <- infections$number_MLG - 1
 
