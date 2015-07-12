@@ -21,7 +21,7 @@ library(SpaceTimeModels)
 
 
 ###############################################################################
-#Factors affecting the number of MLG: 2012
+#Factors affecting the number of coinfections: 2012
 ###############################################################################
 
 infections <- coinf2012
@@ -42,12 +42,12 @@ infections$PA_2011 <- as.numeric(infections$PA_2011)
 infections[,c("PLM2_Sept2012","number_coinf",
               "cumulative_sum","connec2012",
               "road_PA","Distance_to_shore",
-              "PA_2011","AA_F2012")]<-infections[,c("PLM2_Sept2012",
+              "PA_2011","AA_F2012")]<-scale(infections[,c("PLM2_Sept2012",
                                                     "number_coinf",
                                                     "cumulative_sum",
                                                     "connec2012","road_PA",
                                                     "Distance_to_shore",
-                                                    "PA_2011","AA_F2012")]
+                                                    "PA_2011","AA_F2012")])
 coords <- sp::SpatialPoints(infections[,c("Longitude","Latitude")])
 #infections$number_MLG <- infections$number_MLG - 1
 
@@ -62,10 +62,11 @@ mesh$plot()
 model<-ContinuousSpaceModel$new()
 model$setSpatialMesh(mesh)
 model$setSpatialPrior()
-model$setLikelihood("nbinomial")
+model$setLikelihood("binomial")
 
 #Intercept-only model
 model$setSmoothingModel()
-model$addObservationStack(sp=coords, response=infections$number_MLG)
+model$addObservationStack(sp=coords, response=infections$number_coinf,
+                          offset=infections$number_genotyped)
 model$estimate()
 model$summary() # WAIC = 1486.19

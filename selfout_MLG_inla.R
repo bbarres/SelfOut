@@ -39,15 +39,16 @@ summary(complete)
 infections <- infections[complete,]
 
 infections$PA_2011 <- as.numeric(infections$PA_2011)
+infections$road_PA <- as.numeric(infections$road_PA)
 infections[,c("PLM2_Sept2012","number_coinf",
               "cumulative_sum","connec2012",
               "road_PA","Distance_to_shore",
-              "PA_2011","AA_F2012")]<-infections[,c("PLM2_Sept2012",
+              "PA_2011","AA_F2012")]<-scale(infections[,c("PLM2_Sept2012",
                                                     "number_coinf",
                                                     "cumulative_sum",
                                                     "connec2012","road_PA",
                                                     "Distance_to_shore",
-                                                    "PA_2011","AA_F2012")]
+                                                    "PA_2011","AA_F2012")])
 coords <- sp::SpatialPoints(infections[,c("Longitude","Latitude")])
 #infections$number_MLG <- infections$number_MLG - 1
 
@@ -158,7 +159,6 @@ model$clearStack()$addObservationStack(sp=coords,
 model$estimate()
 model$summary() # WAIC = 1454.83
 
-
 # There is no overdispersion, so poisson likelihood is enough
 model$setLikelihood("poisson")
 model$setCovariatesModel(~ 1 + AA_F2012 + PLM2_Sept2012 + connec2012, 
@@ -207,15 +207,16 @@ summary(complete)
 infections <- infections[complete,]
 
 infections$PA_2012 <- as.numeric(infections$PA_2012)
+infections$road_PA <- as.numeric(infections$road_PA)
 infections[,c("PLM2_Sept2013","number_coinf",
               "cumulative_sum","connec2013",
               "road_PA","Distance_to_shore",
-              "PA_2012","AA_F2013")]<-infections[,c("PLM2_Sept2013",
+              "PA_2012","AA_F2013")]<-scale(infections[,c("PLM2_Sept2013",
                                                     "number_coinf",
                                                     "cumulative_sum",
                                                     "connec2013","road_PA",
                                                     "Distance_to_shore",
-                                                    "PA_2012","AA_F2013")]
+                                                    "PA_2012","AA_F2013")])
 coords <- sp::SpatialPoints(infections[,c("Longitude","Latitude")])
 #infections$number_MLG <- infections$number_MLG - 1
 
