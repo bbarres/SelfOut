@@ -34,16 +34,18 @@ infections[infections$number_coinf>0 & infections$number_MLG<2,]$number_MLG<-2
 complete <- complete.cases(infections[,c("PLM2_Sept2012","number_coinf",
                                          "cumulative_sum","connec2012",
                                          "road_PA","Distance_to_shore",
-                                         "PA_2011","number_MLG","AA_F2012")])
+                                         "PA_2011","number_MLG","AA_F2012",
+                                         "number_genotyped")])
 summary(complete)
 infections <- infections[complete,]
 
 infections$PA_2011 <- as.numeric(infections$PA_2011)
-infections[,c("PLM2_Sept2012","number_coinf",
+infections$road_PA <- as.numeric(infections$road_PA)
+infections[,c("PLM2_Sept2012","number_MLG",
               "cumulative_sum","connec2012",
               "road_PA","Distance_to_shore",
               "PA_2011","AA_F2012")]<-scale(infections[,c("PLM2_Sept2012",
-                                                    "number_coinf",
+                                                    "number_MLG",
                                                     "cumulative_sum",
                                                     "connec2012","road_PA",
                                                     "Distance_to_shore",
@@ -66,7 +68,9 @@ model$setLikelihood("binomial")
 
 #Intercept-only model
 model$setSmoothingModel()
-model$addObservationStack(sp=coords, response=infections$number_coinf,
+model$addObservationStack(sp=coords,
+                          response=infections$number_coinf,
+                          covariates=infections,
                           offset=infections$number_genotyped)
 model$estimate()
-model$summary() # WAIC = 1486.19
+model$summary() # WAIC = 
