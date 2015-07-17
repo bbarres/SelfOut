@@ -679,10 +679,13 @@ AllRich<-function(data) #data is a genind object (see adegenet for details)
   #First, determining the smaller number of allele across sampled population
   matloc<-t(matrix(data=datapop@loc.fac,nrow=(dim(datapop@tab)[2]), 
                    ncol=(dim(datapop@tab)[1])))
-  matpop<-matrix(data=datapop@pop.names, nrow=(dim(datapop@tab)[1]), 
+  matpop<-matrix(data=rownames(datapop@tab), nrow=(dim(datapop@tab)[1]), 
                  ncol=(dim(datapop@tab)[2]))
+#   matpop<-matrix(data=datapop@pop.names, nrow=(dim(datapop@tab)[1]), 
+#                  ncol=(dim(datapop@tab)[2]))
   conf<-list(matpop, matloc)
   effN<-(tapply(datapop@tab, conf, sum))
+  effN<-effN[order(as.numeric(rownames(effN))),]
   colnames(effN)<-locNames(data)
   echMin<-min(effN)
   
@@ -745,7 +748,7 @@ data2010<-df2genind(geno2010ade[,loc_name],ploidy=1,
                     loc.names=loc_name,pop=geno2010ade$patche_ID)
 data2010@other$xy<-geno2010ade[,c("Longitude","Latitude")]
 data2010@other$area<-geno2010ade[,c("Area_real")]
-data2010pop<-genind2genpop(data2010,process.other=TRUE, missing="0")
+data2010pop<-genind2genpop(data2010,process.other=TRUE)
 
 #Now we compute the allelic richness in each selected patches
 AllRich(data2010)
@@ -825,7 +828,7 @@ data2011<-df2genind(geno2011ade[,loc_name],ploidy=1,
                     loc.names=loc_name,pop=geno2011ade$patche_ID)
 data2011@other$xy<-geno2011ade[,c("Longitude","Latitude")]
 data2011@other$area<-geno2011ade[,c("Area_real")]
-data2011pop<-genind2genpop(data2011,process.other=TRUE, missing="0")
+data2011pop<-genind2genpop(data2011,process.other=TRUE)
 
 #Now we compute the allelic richness in each selected patches
 AllRich(data2011)
@@ -904,7 +907,7 @@ data2012<-df2genind(geno2012ade[,loc_name],ploidy=1,
                     loc.names=loc_name,pop=geno2012ade$patche_ID)
 data2012@other$xy<-geno2012ade[,c("Longitude","Latitude")]
 data2012@other$area<-geno2012ade[,c("Area_real")]
-data2012pop<-genind2genpop(data2012,process.other=TRUE, missing="0")
+data2012pop<-genind2genpop(data2012,process.other=TRUE)
 
 #Now we compute the allelic richness in each selected patches
 AllRich(data2012)
@@ -983,7 +986,7 @@ data2013<-df2genind(geno2013ade[,loc_name],ploidy=1,
                     loc.names=loc_name,pop=geno2013ade$patche_ID)
 data2013@other$xy<-geno2013ade[,c("Longitude","Latitude")]
 data2013@other$area<-geno2013ade[,c("Area_real")]
-data2013pop<-genind2genpop(data2013,process.other=TRUE, missing="0")
+data2013pop<-genind2genpop(data2013,process.other=TRUE)
 
 #Now we compute the allelic richness in each selected patches
 AllRich(data2013)
