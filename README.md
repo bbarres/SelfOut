@@ -29,7 +29,7 @@ The R code for the article on recombination of a plant pathogenic fungus, *Podos
   * **selfout_barplot.R:** script for the barplot figures that show several aspect of the consequence of coinfection on the disease dynamic of the ribwort powdery mildew. 
   * **selfout_distintrapatch.R:** script to compute the mean distances between samples within patch, for every patch.  
   * **selfout_diversitymap.R:** script for producing map of the Allelic richness and Genotypic richness in Åland patches. 
-  * **selfout_MLG.R:** script to explore the variation of the number of MLG across space. This code was adapted from a [repository](https://github.com/statguy/MultiLocusGenotype) of [Jussi Jousimo](https://github.com/statguy). It uses the `SpaceTimeModels` package that allows an easier use of INLA to fit spatial and time models in an R framework. You can install this package using [this](https://github.com/statguy/SpaceTimeModels) github repository. 
+  * **selfout_MLG_INLA.R:** script to explore the variation of the number of MLG across space. This code was adapted from a [repository](https://github.com/statguy/MultiLocusGenotype) of [Jussi Jousimo](https://github.com/statguy). It uses the `SpaceTimeModels` package that allows an easier use of INLA to fit spatial and time models in an R framework. You can install this package using [this](https://github.com/statguy/SpaceTimeModels) github repository. 
 
 
 ##Some map examples
