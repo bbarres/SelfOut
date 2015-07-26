@@ -61,6 +61,7 @@ par(op)
 
 #export to pdf 16 X 9 inches
 
+
 ###############################################################################
 #second try
 ###############################################################################
@@ -118,6 +119,39 @@ par(op)
 #export to pdf 16 X 9 inches
 
 
-
-
 which(colors()=="hotpink")
+
+
+###############################################################################
+#barplot for the mono-MLG vs several-MLG MLG survival rate
+###############################################################################
+
+op<-par(mfrow=c(1,1),mar=c(5.1,6,6.1,2.1), oma=c(0,0,0,0))
+
+coolcol<-c("dodgerblue3","deeppink")
+datmat<-matrix(c(94,63,84,39),nrow=2)
+temp<-barplot(datmat,beside=TRUE,border=NA,col=coolcol,
+              names.arg=list("winter 2011/2012","winter 2012/2013"),
+              main=coolcol,font=2,las=1,cex.lab=2,lwd=5,ylim=c(0,100))
+mtext(side=2,text="% of MLG overwintering successfully",line=4,font=2,cex=1.2)
+text(temp[1],datmat[1]+3,"n=18",font=2)
+text(temp[2],datmat[2]+3,"n=29",font=2)
+#text((temp[1]+temp[2])/2,max(datmat[1:2])+3,"*",font=2,cex=4)
+text(temp[3],datmat[3]+3,"n=80",font=2)
+text(temp[4],datmat[4]+3,"n=236",font=2)
+#text((temp[3]+temp[4])/2,max(datmat[3:4])+3,"*",font=2,cex=4)
+mtext(side=2,text="D)",font=2,cex=1.2,adj=3,padj=-18,las=1)
+mtext(side=1,text="n stands for the number of patches that overwintered 
+successfully and that were included in this analysis. In blue the patches 
+      with 1 MLG before the winter and in red the patches with more than 
+      1 MLG before winter",
+      font=2,cex=0.5,adj=NA,padj=1.5,las=0)
+
+par(op)
+
+#export to pdf 6 X 9 inches
+
+
+###############################################################################
+#END
+###############################################################################
