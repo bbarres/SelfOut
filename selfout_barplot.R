@@ -128,7 +128,7 @@ which(colors()=="hotpink")
 op<-par(mfrow=c(1,3),mar=c(5.1,16,6.1,2.1), oma=c(0,0,0,0))
 
 #first plot for the overwintering success
-coolcol<-c("grey30","grey70")
+coolcol<-c("grey70","grey30")
 datmat<-matrix(c(51,74,48,65),nrow=2)
 temp<-barplot(datmat,beside=TRUE,border=NA,col=coolcol,
               names.arg=list("Winter 2012/2013","Winter 2013/2014"),
