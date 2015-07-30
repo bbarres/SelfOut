@@ -132,8 +132,8 @@ coolcol<-c("grey70","grey30")
 datmat<-matrix(c(51,74,48,65),nrow=2)
 temp<-barplot(datmat,beside=TRUE,border=NA,col=coolcol,
               names.arg=list("Winter 2012/2013","Winter 2013/2014"),
-              font=2,las=1,cex.lab=2,lwd=5,ylim=c(0,91))
-mtext(side=2,text="% of overwintering success",line=4,font=2,cex=1.2)
+              font=2,las=1,cex.axis=2,cex.names=1,lwd=5,ylim=c(0,91))
+mtext(side=2,text="% of overwintering success",line=6,font=2,cex=1.2)
 text(temp[1],datmat[1]+2,"n=299",font=2)
 text(temp[2],datmat[2]+2,"n=338",font=2)
 text((temp[1]+temp[2])/2,max(datmat[1:2])+6,"***",font=2,cex=4)
@@ -146,8 +146,8 @@ mtext(side=2,text="A)",font=2,cex=1.2,adj=5,padj=-20,las=1)
 datmat<-matrix(c(13,14,12,17),nrow=2)
 temp<-barplot(datmat,beside=TRUE,border=NA,col=coolcol,
               names.arg=list("2012","2013"),
-              font=2,las=1,cex.lab=2,lwd=5,ylim=c(0,22.5))
-mtext(side=2,text="% of colonyzed populations",line=4,font=2,cex=1.2)
+              font=2,las=1,cex.axis=2,cex.names=1,lwd=5,ylim=c(0,22.5))
+mtext(side=2,text="% of colonyzed populations",line=6,font=2,cex=1.2)
 text(temp[1],datmat[1]+1,"n=1263",font=2)
 text(temp[2],datmat[2]+1,"n=2044",font=2)
 text((temp[1]+temp[2])/2,max(datmat[1:2])+2.5,"*",font=2,cex=4)
@@ -160,9 +160,9 @@ mtext(side=2,text="B)",font=2,cex=1.2,adj=5,padj=-20,las=1)
 datmat<-matrix(c(98,98,95,97),nrow=2)
 temp<-barplot(datmat,beside=TRUE,border=NA,col=coolcol,
               names.arg=list("2012","2013"),
-              font=2,las=1,cex.lab=2,lwd=5,ylim=c(0,111))
+              font=2,las=1,cex.axis=2,cex.names=1,lwd=5,ylim=c(0,111))
 mtext(side=2,text="% of populations with resting structures",
-      line=4,font=2,cex=1.2)
+      line=6,font=2,cex=1.2)
 text(temp[1],datmat[1]+3,"n=274",font=2)
 text(temp[2],datmat[2]+3,"n=315",font=2)
 text((temp[1]+temp[2])/2,max(datmat[1:2])+10,"ns",font=3,cex=2)
