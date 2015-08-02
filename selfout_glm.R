@@ -48,6 +48,7 @@ OvWi13_3<-glm(PA_S2014~coinfYN,family=binomial,data=coinf)
 summary(OvWi13_3)
 anova(OvWi13_2,OvWi13_1,test="Chisq")
 summary(OvWi13_1)
+drop1(OvWi13_1,test="Chisq")
 #keeping only the model of interest
 rm(OvWi13_2,OvWi13_3)
 #2013 an example of plot
@@ -82,6 +83,7 @@ OvWi12_3<-glm(PA_S2013~coinfYN,family=binomial,data=coinf)
 summary(OvWi12_3)
 anova(OvWi12_2,OvWi12_1,test="Chisq")
 summary(OvWi12_1)
+drop1(OvWi12_1,test="Chisq")
 #keeping only the model of interest
 rm(OvWi12_2,OvWi12_3)
 #2012 an example of plot
@@ -96,7 +98,7 @@ plot(coinf$PA_S2013~coinf$coinfYN)
 
 
 #we then investigate the effect of the percentage of coinfection on the  
-#on overwintering success. In order to do that, we limit the dataset to 
+#overwintering success. In order to do that, we limit the dataset to 
 #patches with at least 3 individuals, so that the estimation of the percentage 
 #of coinfection is relevant
 
@@ -125,6 +127,7 @@ pOvWi13_3<-glm(PA_S2014~percoinf,family=binomial,data=coinf)
 summary(pOvWi13_3)
 anova(pOvWi13_2,pOvWi13_1,test="Chisq")
 summary(pOvWi13_1)
+drop1(pOvWi13_1,test="Chisq")
 #keeping only the model of interest
 rm(pOvWi13_2,pOvWi13_3)
 
@@ -153,6 +156,7 @@ pOvWi12_3<-glm(PA_S2013~percoinf,family=binomial,data=coinf)
 summary(pOvWi12_3)
 anova(pOvWi12_2,pOvWi12_1,test="Chisq")
 summary(pOvWi12_1)
+drop1(pOvWi12_1,test="Chisq")
 #keeping only the model of interest
 rm(pOvWi12_2,pOvWi12_3)
 

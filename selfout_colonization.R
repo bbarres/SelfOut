@@ -138,6 +138,7 @@ modcolo_13 <- glm(
   family = binomial,data = temp
 )
 summary(modcolo_13)
+drop1(modcolo_13,test="Chisq")
 #cleaning the environment
 rm(temp,active,foc_patches,colo_patches)
 
@@ -191,6 +192,7 @@ modcolo_12 <- glm(
     family = binomial,data = temp
   )
 summary(modcolo_12)
+drop1(modcolo_12,test="Chisq")
 #cleaning the environment
 rm(temp,active,foc_patches,colo_patches)
 
