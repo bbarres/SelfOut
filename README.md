@@ -10,11 +10,11 @@ The R code for the article on recombination of a plant pathogenic fungus, *Podos
 ![alt text](http://googledrive.com/host/0B-FIusWb7o6PfjdhbUJncm1mdjM1NnQ1TWl6MHhZUnNRZjd6RkUtUVo5WlFsVURTV0lvQjA/Samp2012.png "A map of coinfected and single infected samples in 2012")  |  ![alt text](http://googledrive.com/host/0B-FIusWb7o6PfjdhbUJncm1mdjM1NnQ1TWl6MHhZUnNRZjd6RkUtUVo5WlFsVURTV0lvQjA/Samp2013.png "A map of coinfected and single infected samples in 2013")
 
 
----
 
 
 >These maps show the samples that were found to be coinfected (red) or single infected (green) in 2012 and 2013. This study is a follow up of the 2015 article of **_Susi et al_**: [Co-infection alters population dynamics of infectious disease](http://www.nature.com/ncomms/2015/150108/ncomms6975/full/ncomms6975.html). 
 
+---
 
 
 ##List of the different scripts
