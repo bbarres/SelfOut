@@ -132,7 +132,7 @@ par(op)
 #computing and mapping the relative risk surface of coinfection
 ###############################################################################
 
-#Maps for 2012 including
+#Maps for 2012
 
 myPal<-colorRampPalette(brewer.pal(9,"Blues"))(25)
 
@@ -203,7 +203,7 @@ color.legend(165000,6670000,167000,6715000,col.labels,
 #export the map 16 x 10 inches or 1600 x 1000 for jpeg
 
 
-#Maps for 2013 including
+#Maps for 2013
 
 myPal<-colorRampPalette(brewer.pal(9,"Blues"))(25)
 
@@ -284,11 +284,12 @@ op<-par(mfrow=c(1,2))
 
 #map with the color scale not starting as white (so we can distinguish between 
 #no data and no coinfection)
-col.labels<-breakcoin2012
+col.labels<-c("0","0.2","0.4","0.6","0.8")
 myPal<-colorRampPalette(brewer.pal(9,"Reds"))(25)[3:25]
+
 plot(Aland,lty=0)
 #title(main="Map of the relative risk surface of coinfection vs infection in 2012")
-plot(prisk2012,col=myPal,add=TRUE)
+plot(prisk2012,col=myPal,zlim=c(0,0.8),add=TRUE)
 plot(Aland,add=TRUE,lwd=3)
 #adding the sampling point
 points(purecoinf2012[,1:2],pch=19,cex=1.2,col=grey(0.2))
@@ -297,11 +298,9 @@ scalebar(c(86000,6667000),20000,"km",division.cex=1.5)
 #color.legend(165000,6670000,167000,6715000,col.labels,
 #             myPal,gradient="y",align="rb",cex=2) 
 
-col.labels<-breakcoin2013
-myPal<-colorRampPalette(brewer.pal(9,"Reds"))(25)[3:25]
 plot(Aland,lty=0)
 #title(main="Map of the relative risk surface of coinfection vs infection in 2013")
-plot(prisk2013,col=myPal,add=TRUE)
+plot(prisk2013,col=myPal,zlim=c(0,0.8),add=TRUE)
 plot(Aland,add=TRUE,lwd=3)
 #adding the sampling point
 points(purecoinf2013[,1:2],pch=19,cex=1.2,col=grey(0.2))
