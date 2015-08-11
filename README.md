@@ -3,7 +3,7 @@
 The R code for the article on recombination of a plant pathogenic fungus, *Podosphaera plantaginis*, in the Åland Islands metapopulation. 
 
 ---
-
+ 
 
        2012                |           2013          
 :-------------------------:|:-------------------------:
@@ -11,10 +11,9 @@ The R code for the article on recombination of a plant pathogenic fungus, *Podos
 
 
 
-
 >These maps show the samples that were found to be coinfected (red) or single infected (green) in 2012 and 2013. This study is a follow up of the 2015 article of **_Susi et al_**: [Co-infection alters population dynamics of infectious disease](http://www.nature.com/ncomms/2015/150108/ncomms6975/full/ncomms6975.html). 
 
-#
+# 
 
 
 ##List of the different scripts
@@ -31,6 +30,7 @@ The R code for the article on recombination of a plant pathogenic fungus, *Podos
   * **selfout_diversitymap.R:** script for producing map of the Allelic richness and Genotypic richness in Åland patches. 
   * **selfout_MLG_inla.R:** script to explore the variation of the number of MLG across space. This code was adapted from a [repository](https://github.com/statguy/MultiLocusGenotype) of [Jussi Jousimo](https://github.com/statguy). It uses the `SpaceTimeModels` package that allows an easier use of INLA to fit spatial and time models in an R framework. You can install this package using [this](https://github.com/statguy/SpaceTimeModels) github repository. 
   * **selfout_coinfectionmap.R:** script to produce the map of the relative risk surface of coinfection vs single infection in 2012 and 2013. See below for an example of the output that can be produced. 
+  * **selfout_GenoRichmap.R:** script to produce the map of the genotypic richness in 2012 and 2013. The genotypic richness was evaluated on a minimum sample size of 3 successfully genotyped pure individuals per patch. A spatial smoothing of the genotypic richness values was performed with the same bandwidth used for the coinfection map. 
 
 
 ##Some map examples
