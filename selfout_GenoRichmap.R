@@ -98,7 +98,10 @@ samppatch2012<-samppatch2012[complete.cases(samppatch2012),]
 samppatch2012ppp<-ppp(samppatch2012[,1], samppatch2012[,2],
                       marks=samppatch2012[,3],window=boundary) 
 #computing the smoothing kernel of the Genotypic richness
+#hmax controls the range of trial values of smoothing bandwidth
 smoothGr2012<-(Smooth.ppp(samppatch2012ppp,hmax=8500))
+#sigma control the bandwidth of the kernel, here we use the same 
+#bandwidth as in the coinfection maps smoothing
 smoothGr2012<-(Smooth.ppp(samppatch2012ppp,sigma=1157))
 
 #preparing the dataset for 'spatstat' package
@@ -109,7 +112,10 @@ samppatch2013<-samppatch2013[complete.cases(samppatch2013),]
 samppatch2013ppp<-ppp(samppatch2013[,1], samppatch2013[,2],
                       marks=samppatch2013[,3],window=boundary) 
 #computing the smoothing kernel of the Genotypic richness
+#hmax controls the range of trial values of smoothing bandwidth
 smoothGr2013<-(Smooth.ppp(samppatch2013ppp,hmax=8500))
+#sigma control the bandwidth of the kernel, here we use the same 
+#bandwidth as in the coinfection maps smoothing
 smoothGr2013<-(Smooth.ppp(samppatch2013ppp,sigma=1251))
 
 
@@ -156,7 +162,7 @@ par(op)
 
 rm(Aland_sup,Aland_lim,samppoint,boundary,samppatch2012,samppatch2012ppp,
    samppatch2013,samppatch2013ppp,coinf2012t,coinf2013t,smoothGr2012,
-   smoothGr2013,myPal,)
+   smoothGr2013,myPal)
 
 
 ###############################################################################
