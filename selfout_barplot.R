@@ -189,16 +189,16 @@ coolcol<-c("grey70","grey30")
 
 #first plot for the colonization success
 datmat<-matrix(c(13,14,12,17),nrow=2)
-temp<-barplot(datmat,beside=TRUE,border=NA,col=coolcol,axisnames=TRUE,
-              names.arg=list("2012","2013"),bty="l",axis.lty=1,bty="l",
-              font=2,las=1,cex.axis=3,cex.names=1,lwd=5,ylim=c(0,22.5))
-axis(1,at=c(2,5),labels=list("2012","2013"),lwd=5,font=2,cex.axis=3, xlim=c(0,5),pos=0)
-mtext(side=2,text="% of colonyzed populations",line=6,font=2,cex=1.2)
+temp<-barplot(datmat,beside=TRUE,border=NA,col=coolcol,font=2,las=1,
+              cex.axis=3,cex.names=1,lwd=5,ylim=c(0,22.5),xpd=FALSE)
+axis(1,at=c(0,6),lwd=5,labels=FALSE,lwd.ticks=0)
+axis(1,at=c(2,5),labels=list("2012","2013"),lwd=5,font=2,cex.axis=3)
+mtext(side=2,text="% of colonyzed populations",line=6,font=2,cex=1.5)
 text(temp[1],datmat[1]+1,"n=1263",font=2,cex=2)
-text(temp[2],datmat[2]+1,"n=2044",font=2)
+text(temp[2],datmat[2]+1,"n=2044",font=2,cex=2)
 text((temp[1]+temp[2])/2,max(datmat[1:2])+2.5,"*",font=2,cex=4)
-text(temp[3],datmat[3]+1,"n=962",font=2)
-text(temp[4],datmat[4]+1,"n=1184",font=2)
+text(temp[3],datmat[3]+1,"n=962",font=2,cex=2)
+text(temp[4],datmat[4]+1,"n=1184",font=2,cex=2)
 text((temp[3]+temp[4])/2,max(datmat[3:4])+2.5,"*",font=2,cex=4)
 mtext(side=2,text="A)",font=2,cex=1.2,adj=5,padj=-20,las=1)
 
