@@ -180,6 +180,65 @@ par(op)
 
 
 ###############################################################################
+#fourth try, still not in color, with bigger text font
+###############################################################################
+
+op<-par(mfrow=c(1,3),mar=c(5.1,16,6.1,2.1), oma=c(0,0,0,0))
+
+coolcol<-c("grey70","grey30")
+
+#first plot for the colonization success
+datmat<-matrix(c(13,14,12,17),nrow=2)
+temp<-barplot(datmat,beside=TRUE,border=NA,col=coolcol,axisnames=TRUE,
+              names.arg=list("2012","2013"),bty="l",axis.lty=1,bty="l",
+              font=2,las=1,cex.axis=3,cex.names=1,lwd=5,ylim=c(0,22.5))
+axis(1,at=c(2,5),labels=list("2012","2013"),lwd=5,font=2,cex.axis=3, xlim=c(0,5),pos=0)
+mtext(side=2,text="% of colonyzed populations",line=6,font=2,cex=1.2)
+text(temp[1],datmat[1]+1,"n=1263",font=2,cex=2)
+text(temp[2],datmat[2]+1,"n=2044",font=2)
+text((temp[1]+temp[2])/2,max(datmat[1:2])+2.5,"*",font=2,cex=4)
+text(temp[3],datmat[3]+1,"n=962",font=2)
+text(temp[4],datmat[4]+1,"n=1184",font=2)
+text((temp[3]+temp[4])/2,max(datmat[3:4])+2.5,"*",font=2,cex=4)
+mtext(side=2,text="A)",font=2,cex=1.2,adj=5,padj=-20,las=1)
+
+
+#second plot for the overwintering success
+datmat<-matrix(c(51,74,48,65),nrow=2)
+temp<-barplot(datmat,beside=TRUE,border=NA,col=coolcol,
+              names.arg=list("Winter 2012/2013","Winter 2013/2014"),
+              font=2,las=1,cex.axis=2,cex.names=1,lwd=5,ylim=c(0,91))
+mtext(side=2,text="% of overwintering success",line=6,font=2,cex=1.2)
+text(temp[1],datmat[1]+2,"n=299",font=2)
+text(temp[2],datmat[2]+2,"n=338",font=2)
+text((temp[1]+temp[2])/2,max(datmat[1:2])+6,"***",font=2,cex=4)
+text(temp[3],datmat[3]+2,"n=372",font=2)
+text(temp[4],datmat[4]+2,"n=346",font=2)
+text((temp[3]+temp[4])/2,max(datmat[3:4])+6,"*",font=2,cex=4)
+mtext(side=2,text="B)",font=2,cex=1.2,adj=5,padj=-20,las=1)
+
+
+#third plot for the production of overwintering structures
+datmat<-matrix(c(98,98,95,97),nrow=2)
+temp<-barplot(datmat,beside=TRUE,border=NA,col=coolcol,
+              names.arg=list("2012","2013"),
+              font=2,las=1,cex.axis=2,cex.names=1,lwd=5,ylim=c(0,111))
+mtext(side=2,text="% of populations with resting structures",
+      line=6,font=2,cex=1.2)
+text(temp[1],datmat[1]+3,"n=274",font=2)
+text(temp[2],datmat[2]+3,"n=315",font=2)
+text((temp[1]+temp[2])/2,max(datmat[1:2])+10,"ns",font=3,cex=2)
+text(temp[3],datmat[3]+3,"n=374",font=2)
+text(temp[4],datmat[4]+3,"n=343",font=2)
+text((temp[3]+temp[4])/2,max(datmat[3:4])+10,"ns",font=3,cex=2)
+mtext(side=2,text="C)",font=2,cex=1.2,adj=5,padj=-20,las=1)
+
+par(op)
+
+#export to pdf 16 X 9 inches
+
+
+###############################################################################
 #barplot for the mono-MLG vs several-MLG MLG survival rate
 ###############################################################################
 
