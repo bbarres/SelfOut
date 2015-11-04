@@ -193,7 +193,7 @@ temp<-barplot(datmat,beside=TRUE,border=NA,col=coolcol,font=2,las=1,
               cex.axis=3,cex.names=1,lwd=5,ylim=c(0,22.5),xpd=FALSE)
 axis(1,at=c(0,6),lwd=5,labels=FALSE,lwd.ticks=0)
 axis(1,at=c(2,5),labels=list("2012","2013"),lwd=5,font=2,cex.axis=2.5,padj=1)
-mtext(side=2,text="% of colonyzed populations",line=6,font=2,cex=2)
+mtext(side=2,text="% of colonyzed populations",line=7,font=2,cex=2)
 text(temp[1],datmat[1]+1,"n=1263",font=3,cex=2)
 text(temp[2],datmat[2]+1,"n=2044",font=3,cex=2)
 text((temp[1]+temp[2])/2,max(datmat[1:2])+2.5,"*",font=2,cex=4)
@@ -210,7 +210,7 @@ temp<-barplot(datmat,beside=TRUE,border=NA,col=coolcol,font=2,las=1,
 axis(1,at=c(0,6),lwd=5,labels=FALSE,lwd.ticks=0)
 axis(1,at=c(2,5),labels=list("Winter\n2012/2013","Winter\n2013/2014"),lwd=5,
      font=2,cex.axis=2.5,padj=1)
-mtext(side=2,text="% of overwintering success",line=6,font=2,cex=2)
+mtext(side=2,text="% of overwintering success",line=7,font=2,cex=2)
 text(temp[1],datmat[1]+3,"n=299",font=3,cex=2)
 text(temp[2],datmat[2]+3,"n=338",font=3,cex=2)
 text((temp[1]+temp[2])/2,max(datmat[1:2])+8,"***",font=2,cex=4)
@@ -227,10 +227,10 @@ temp<-barplot(datmat,beside=TRUE,border=NA,col=coolcol,font=2,las=1,
 axis(1,at=c(0,6),lwd=5,labels=FALSE,lwd.ticks=0)
 axis(1,at=c(2,5),labels=list("2012","2013"),lwd=5,font=2,cex.axis=2.5,padj=1)
 mtext(side=2,text="% of populations with\nresting structures",
-      line=6,font=2,cex=2)
+      line=7,font=2,cex=2)
 text(temp[1],datmat[1]+4,"n=274",font=3,cex=2)
 text(temp[2],datmat[2]+4,"n=315",font=3,cex=2)
-text((temp[1]+temp[2])/2,max(datmat[1:2])+12,"ns",font=3,cex=2)
+text((temp[1]+temp[2])/2,max(datmat[1:2])+12,"ns",font=3,cex=2,xpd=TRUE)
 text(temp[3],datmat[3]+4,"n=374",font=3,cex=2)
 text(temp[4],datmat[4]+4,"n=343",font=3,cex=2)
 text((temp[3]+temp[4])/2,max(datmat[3:4])+12,"ns",font=3,cex=2)
@@ -238,7 +238,10 @@ mtext(side=2,text="C)",font=2,cex=2,adj=5,padj=-10,las=1)
 
 par(op)
 
-#export to TIFF 2089 x 600
+#export to pdf 24.5 x 7 inches
+#export to TIFF 2049 x 600 (but problem of resolution for publication
+#72 ppi instead of 300-600 ppi required)
+
 
 
 ###############################################################################
