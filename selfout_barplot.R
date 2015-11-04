@@ -239,9 +239,8 @@ mtext(side=2,text="C)",font=2,cex=2,adj=5,padj=-10,las=1)
 par(op)
 
 #export to pdf 24.5 x 7 inches
-#export to TIFF 2049 x 600 (but problem of resolution for publication
+#export to TIFF 2049 x 600 pixels (but problem of resolution for publication,
 #72 ppi instead of 300-600 ppi required)
-
 
 
 ###############################################################################
