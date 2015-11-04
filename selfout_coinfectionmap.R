@@ -166,7 +166,8 @@ op<-par(mfrow=c(1,2))
 col.labels<-paste(breakdens,"e-02")
 myPal<-colorRampPalette(brewer.pal(9,"Blues"))(25)
 plot(Aland,lty=0)
-title(main="Map of the estimate of the intensity function of the sampling process")
+title(main="Map of the estimate of the intensity function of the sampling 
+      process")
 plot(kdensityppp,col=myPal,add=TRUE)
 plot(Aland,add=TRUE)
 scalebar(c(86000,6667000),20000,"km")
@@ -191,7 +192,8 @@ par(op) #export the map 32 x 10 inches
 col.labels<-breakcoin2012
 myPal<-colorRampPalette(brewer.pal(9,"Reds"))(25)[3:25]
 plot(Aland,lty=0)
-title(main="Map of the relative risk surface of coinfection vs infection in 2012")
+title(main="Map of the relative risk surface of coinfection vs infection 
+      in 2012")
 plot(prisk2012,col=myPal,add=TRUE)
 plot(Aland,add=TRUE,lwd=3)
 #adding the sampling point
@@ -264,7 +266,8 @@ par(op)
 col.labels<-breakcoin2013
 myPal<-colorRampPalette(brewer.pal(9,"Reds"))(25)[3:25]
 plot(Aland,lty=0)
-title(main="Map of the relative risk surface of coinfection vs infection in 2013")
+title(main="Map of the relative risk surface of coinfection vs infection 
+      in 2013")
 plot(prisk2013,col=myPal,add=TRUE)
 plot(Aland,add=TRUE,lwd=3)
 #adding the sampling point
@@ -288,7 +291,8 @@ col.labels<-c("0","0.2","0.4","0.6","0.8")
 myPal<-colorRampPalette(brewer.pal(9,"Reds"))(25)[3:25]
 
 plot(Aland,lty=0)
-#title(main="Map of the relative risk surface of coinfection vs infection in 2012")
+#title(main="Map of the relative risk surface of coinfection vs infection 
+#      in 2012")
 plot(prisk2012,col=myPal,zlim=c(0,0.8),add=TRUE)
 plot(Aland,add=TRUE,lwd=3)
 #adding the sampling point
@@ -299,7 +303,8 @@ scalebar(c(86000,6667000),20000,"km",division.cex=1.5)
 #             myPal,gradient="y",align="rb",cex=2) 
 
 plot(Aland,lty=0)
-#title(main="Map of the relative risk surface of coinfection vs infection in 2013")
+#title(main="Map of the relative risk surface of coinfection vs infection 
+#      in 2013")
 plot(prisk2013,col=myPal,zlim=c(0,0.8),add=TRUE)
 plot(Aland,add=TRUE,lwd=3)
 #adding the sampling point
@@ -310,6 +315,42 @@ color.legend(165000,6670000,167000,6715000,col.labels,
              myPal,gradient="y",align="rb",cex=2) 
 
 par(op)
+
+
+###############################################################################
+#Map for the final figure of the manuscript
+###############################################################################
+
+#map with the color scale not starting as white (so we can distinguish between 
+#no data and no coinfection)
+col.labels<-c("0","0.2","0.4","0.6","0.8")
+myPal<-colorRampPalette(brewer.pal(9,"Reds"))(25)[3:25]
+
+plot(Aland,lty=0)
+plot(prisk2012,col=myPal,zlim=c(0,0.8),add=TRUE)
+plot(Aland,add=TRUE,lwd=3)
+#adding the sampling point
+points(purecoinf2012[,1:2],pch=19,cex=1.2,col=grey(0.2))
+#adding the scalebar
+scalebar(c(86000,6668000),20000,"km",division.cex=1.5)
+
+#export as a pdf file 12 x 8 inches
+
+plot(Aland,lty=0)
+plot(prisk2013,col=myPal,zlim=c(0,0.8),add=TRUE)
+plot(Aland,add=TRUE,lwd=3)
+#adding the sampling point
+points(purecoinf2013[,1:2],pch=19,cex=1.2,col=grey(0.2))
+#adding the scalebar
+color.legend(165000,6670000,167000,6715000,col.labels,
+             myPal,gradient="y",align="rb",cex=2) 
+
+#export as a pdf file 12 x 8 inches
+
+#import the two files in gimp and convert them to .tiff after removing alpha, 
+#flatten and resize them to 800 x 556 for 2012 map and 931 x 556 for 2013 map. 
+#then combine them in powerpoint, add the letter for the 2 panels and convert 
+#the file to a pdf that you will turn again to a .tiff of 2049 x 700 pixels
 
 
 ###############################################################################
