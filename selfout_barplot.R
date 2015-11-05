@@ -183,7 +183,7 @@ par(op)
 #fourth try, still not in color, with bigger text font
 ###############################################################################
 
-op<-par(mfrow=c(1,3),mar=c(5.1,16,3.1,2.1), oma=c(4,0,1,0))
+op<-par(mfrow=c(1,3),mar=c(5.1,16,3.1,2.1), oma=c(4,1,1,0))
 
 coolcol<-c("grey70","grey30")
 
@@ -200,8 +200,7 @@ text((temp[1]+temp[2])/2,max(datmat[1:2])+2.5,"*",font=2,cex=4)
 text(temp[3],datmat[3]+1,"n=962",font=3,cex=2)
 text(temp[4],datmat[4]+1,"n=1184",font=3,cex=2)
 text((temp[3]+temp[4])/2,max(datmat[3:4])+2.5,"*",font=2,cex=4)
-mtext(side=2,text="A)",font=2,cex=2,adj=5,padj=-10,las=1)
-
+mtext(side=2,text="A)",font=2,cex=2,adj=4.5,padj=-10,las=1)
 
 #second plot for the overwintering success
 datmat<-matrix(c(51,74,48,65),nrow=2)
@@ -217,8 +216,7 @@ text((temp[1]+temp[2])/2,max(datmat[1:2])+8,"***",font=2,cex=4)
 text(temp[3],datmat[3]+3,"n=372",font=3,cex=2)
 text(temp[4],datmat[4]+3,"n=346",font=3,cex=2)
 text((temp[3]+temp[4])/2,max(datmat[3:4])+8,"*",font=2,cex=4)
-mtext(side=2,text="B)",font=2,cex=2,adj=5,padj=-10,las=1)
-
+mtext(side=2,text="B)",font=2,cex=2,adj=4.5,padj=-10,las=1)
 
 #third plot for the production of overwintering structures
 datmat<-matrix(c(98,98,95,97),nrow=2)
@@ -234,11 +232,11 @@ text((temp[1]+temp[2])/2,max(datmat[1:2])+12,"ns",font=3,cex=2,xpd=TRUE)
 text(temp[3],datmat[3]+4,"n=374",font=3,cex=2)
 text(temp[4],datmat[4]+4,"n=343",font=3,cex=2)
 text((temp[3]+temp[4])/2,max(datmat[3:4])+12,"ns",font=3,cex=2)
-mtext(side=2,text="C)",font=2,cex=2,adj=5,padj=-10,las=1)
+mtext(side=2,text="C)",font=2,cex=2,adj=4.5,padj=-10,las=1)
 
 par(op)
 
-#export to pdf 24.5 x 7 inches
+#export to pdf 24.5 x 8 inches
 #export to TIFF 2049 x 600 pixels (but problem of resolution for publication,
 #72 ppi instead of 300-600 ppi required)
 
