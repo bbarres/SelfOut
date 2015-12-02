@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.34573.svg)](http://dx.doi.org/10.5281/zenodo.34573)
+
 #SelfOut
 
 The R code for the article on recombination of a plant pathogenic fungus, *Podosphaera plantaginis*, in the Åland Islands metapopulation. 
