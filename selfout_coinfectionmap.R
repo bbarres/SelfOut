@@ -31,7 +31,7 @@ scalebar <- function(loc,length,unit="km",division.cex=.8,...) {
   for (i in 1:5) segments(x[i],y[2],x[i],y[3])
   labels <- (x[c(1,3)]-loc[1])/1000
   labels <- append(labels,paste((x[5]-loc[1])/1000,unit))
-  text(x[c(1,3,5)],y[4],labels=labels,adj=.5,cex=division.cex)
+  text(x[c(1,3,5)],y[4],labels=labels,adj=c(0.5,0),cex=division.cex)
 }
 
 northarrow <- function(loc,size,bearing=0,cols,cex=1,...) {
@@ -332,7 +332,7 @@ plot(Aland,add=TRUE,lwd=3)
 #adding the sampling point
 points(purecoinf2012[,1:2],pch=19,cex=1.2,col=grey(0.2))
 #adding the scalebar
-scalebar(c(86000,6668000),20000,"km",division.cex=1.5)
+scalebar(c(86000,6667500),20000,"kms",division.cex=1.5)
 
 #export as a pdf file 12 x 8 inches
 
