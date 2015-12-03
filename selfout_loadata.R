@@ -140,6 +140,8 @@ coinf2013 <- read.table(
 
 
 
+##to remove before submission
+
 coinf<-coinf2012 #here you can change the file you want to use for the analysis
 
 #adding a percentage of coinfection column to the data table 
@@ -173,19 +175,6 @@ evolinf4<-evolinf4[!is.na(evolinf4$AA_F2012),]
 evolinf4<-cbind(evolinf4,"YNcoinf"=cut(evolinf4$percoinf,breaks=100*(-1:1),labels=c(0,1)))
 evolinf4<-cbind(evolinf4,"coinfCAT"=cut(evolinf4$percoinf,breaks=c(-1,1,24,49,74,100),labels=c(0,1,2,3,4),
                                         ordered_result=TRUE))
-
-
-###############################################################################
-#formating dataset for production of chasmotecia
-###############################################################################
-
-
-chasmo<-read.table("chasmo.txt",header=TRUE,sep="\t",
-                      colClasses=c("factor","numeric","factor","numeric","numeric","numeric",
-                                   "factor","numeric","factor")
-)
-
-
 
 
 ###############################################################################
