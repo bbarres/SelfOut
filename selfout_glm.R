@@ -257,6 +257,9 @@ summary(modnewgeno_3)
 anova(modnewgeno_3,modnewgeno_1,test="Chisq")
 anova(modnewgeno_2,modnewgeno_1,test="Chisq")
 
+#Finally we only keep the co-infection rate in the model
+anova(modnewgeno_2,test="Chisq")
+
 #cleaning the environment
 rm(breaks,freq.cut,modnewgeno_2,modnewgeno_3)
 
