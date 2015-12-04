@@ -251,6 +251,31 @@ plot(patchshape[patchshape[[3]] %in% fopa_coin,1],
 plot(patchshape[patchshape[[3]] %in% prpa_coin,1],
      col="red",lty=0,add=TRUE)
 
+#Adding lines between the focal and the associated patches
+for (i in 1:length(foc_patches)) {
+  temp2<-temp[as.character(temp$foc_patche)==foc_patches[i],]
+  for (j in 1:dim(temp2)[1]){
+    lines(c(temp2[j,"Longitude.x"],
+            temp2[j,"Longitude.y"]),
+          c(temp2[j,"Latitude.x"],
+            temp2[j,"Latitude.y"]),lwd=0.05,lty=2,
+          col=temp2[j,"PA_2013.y"]+1)
+  }
+}
+
+temp2<-temp[as.character(temp$foc_patche)==foc_patches[2],]
+i<-1
+lines(c(temp2[i,"Longitude.x"],
+        temp2[i,"Longitude.y"]),
+      c(temp2[i,"Latitude.x"],
+        temp2[i,"Latitude.y"]),lwd=0.1)
+
+#draw the relationship between focal patches and proximal patches
+lines(c( temp[temp$foc_patche=="158","Longitude.x"],
+         temp[temp$foc_patche=="158","Longitude.y"]),
+      c(temp[temp$foc_patche=="158","Latitude.x"],
+        temp[temp$foc_patche=="158","Latitude.y"]))
+
 rm(prpa_coin,fopa_coin,temp,foc_patches,inf_patches,ext_patches)
 
 #export the map to a pdf file 20 x 15 inches
