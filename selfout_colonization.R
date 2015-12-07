@@ -196,6 +196,27 @@ drop1(modcolo_12,test="Chisq")
 #cleaning the environment
 rm(temp,active,foc_patches,colo_patches)
 
+###############################################################################
+#Functions to plot the scale
+###############################################################################
+
+#function for a scale, found in "Auxiliary Cartographic Functions in R: 
+#North Arrow, Scale Bar, and Label with a Leader Arrow", Tanimura et al 2007, 
+#J of Statistical software
+#The code has been slightly modified in order to convert the meter in km
+scalebar <- function(loc,length,unit="km",division.cex=.8,...) {
+  if(missing(loc)) stop("loc is missing")
+  if(missing(length)) stop("length is missing")
+  x <- c(0,length/c(4,2,4/3,1),length*1.1)+loc[1]
+  y <- c(0,length/(10*3:1))+loc[2]
+  cols <- rep(c("black","white"),2)
+  for (i in 1:4) rect(x[i],y[1],x[i+1],y[2],col=cols[i])
+  for (i in 1:5) segments(x[i],y[2],x[i],y[3])
+  labels <- (x[c(1,3)]-loc[1])/1000
+  labels <- append(labels,paste((x[5]-loc[1])/1000,unit))
+  text(x[c(1,3,5)],y[4],labels=labels,adj=c(0.5,0.3),cex=division.cex)
+}
+
 
 ###############################################################################
 #Figure to examplify the main result of the analysis
@@ -248,21 +269,6 @@ prox_patche<-levels(drop.levels(temp$prox_patche))
 all_patche<-c(foc_patche,prox_patche)
 #then we have the patches that are infected at the end of the season
 inf_patche<-levels(drop.levels(temp$prox_patche[temp$PA_2013.y==1]))
-
-#we plot the background of the map
-plot(Aland,col="white",lty=0)
-#we add the entire set of patches
-plot(patchshape[patchshape[[3]] %in% all_patche,1]
-     ,col="white",lty=1,lwd=0.1,add=TRUE)
-plot(patchshape[patchshape[[3]] %in% all_patche,1]
-     ,col="white",lty=0,add=TRUE)
-#we add the patches that are infected by the end of the survey
-plot(patchshape[patchshape[[3]] %in% inf_patche,1],col="lightblue",
-     lty=0,add=TRUE)
-#we superimpose the focal patches to the infected patches in the fall
-plot(patchshape[patchshape[[3]] %in% foc_patche,1],col="darkblue",
-     lty=0,add=TRUE)
-
 #then we can emphasize the focal patch with coinfection
 #we list the focal patches with coinfection
 fopa_coin<-levels(drop.levels(temp$foc_patche[temp$PA_S2013.x==1 & 
@@ -272,13 +278,50 @@ fopa_coin<-levels(drop.levels(temp$foc_patche[temp$PA_S2013.x==1 &
 prpa_coin<-levels(drop.levels(temp$prox_patche[temp$PA_2013.y==1 & 
                                                  temp$foc_patche %in% 
                                                  fopa_coin]))
+
+op<-par(mfrow=c(1,2),mar=c(0,0,0,0),oma=c(0,1,0,1))
+#we plot the general map
+plot(Aland,col="white",lty=1)
+points(patche_info[patche_info$ID %in% all_patche,]$Longitude,
+       patche_info[patche_info$ID %in% all_patche,]$Latitude,
+       cex=0.5,bg="transparent",pch=21,col="black")
+points(patche_info[patche_info$ID %in% inf_patche,]$Longitude,
+       patche_info[patche_info$ID %in% inf_patche,]$Latitude,
+       cex=0.5,bg="lightblue",pch=21,col="black")
+points(patche_info[patche_info$ID %in% foc_patche,]$Longitude,
+       patche_info[patche_info$ID %in% foc_patche,]$Latitude,
+       cex=0.5,bg="darkblue",pch=21,col="black")
+points(patche_info[patche_info$ID %in% prpa_coin,]$Longitude,
+       patche_info[patche_info$ID %in% prpa_coin,]$Latitude,
+       cex=0.5,bg="red",pch=21,col="black")
+points(patche_info[patche_info$ID %in% fopa_coin,]$Longitude,
+       patche_info[patche_info$ID %in% fopa_coin,]$Latitude,
+       cex=0.5,bg="darkred",pch=21,col="black")
+polygon(x=c(108700,110800,110800,108700),
+        y=c(6673200,6673200,6675100,6675100),
+        border="darkorange",lwd=1.5)
+mtext(side=2,text="A)",font=2,cex=1,adj=0,padj=-8,las=1,outer=TRUE,line=-1)
+
+#we plot the background of the map
+plot(Aland,col="white",lty=0,xlim=c(108700,110800),ylim=c(6673200,6675100))
+#we add the entire set of patches
+plot(patchshape[patchshape[[3]] %in% all_patche,1]
+     ,col="white",lty=1,lwd=1,add=TRUE)
+plot(patchshape[patchshape[[3]] %in% all_patche,1]
+     ,col="white",lty=0,add=TRUE)
+#we add the patches that are infected by the end of the survey
+plot(patchshape[patchshape[[3]] %in% inf_patche,1],col="lightblue",
+     lty=0,add=TRUE)
+#we superimpose the focal patches to the infected patches in the fall
+plot(patchshape[patchshape[[3]] %in% foc_patche,1],col="darkblue",
+     lty=0,add=TRUE)
 #Here we superimposed the coinfection information on the previous map
 plot(patchshape[patchshape[[3]] %in% fopa_coin,1],
      col="darkred",lty=0,add=TRUE)
 plot(patchshape[patchshape[[3]] %in% prpa_coin,1],
      col="red",lty=0,add=TRUE)
 
-#finaly we can represent the relationship between the focal patche and 
+#finaly we can represent the relationship between the focal patches and 
 #their related candidate for colonization neighbors by a dash line
 for (i in 1:length(foc_patches)) {
   temp2<-temp[as.character(temp$foc_patche)==foc_patches[i],]
@@ -286,15 +329,22 @@ for (i in 1:length(foc_patches)) {
     lines(c(temp2[j,"Longitude.x"],
             temp2[j,"Longitude.y"]),
           c(temp2[j,"Latitude.x"],
-            temp2[j,"Latitude.y"]),lwd=0.05,lty=2,
+            temp2[j,"Latitude.y"]),lwd=1,lty=2,
           col=temp2[j,"PA_2013.y"]+1)
   }
 }
+polygon(x=c(108700,110800,110800,108700),
+        y=c(6673200,6673200,6675100,6675100),
+        border="darkorange",lwd=2)
+scalebar(c(109700,6673240),1000,"km",division.cex=0.5,xpd=NA)
+mtext(side=2,text="B)",font=2,cex=1,adj=0,padj=-8,las=1,outer=TRUE,line=-20)
+
+par(op)
 
 rm(prpa_coin,fopa_coin,temp,foc_patches,colo_patches,
    inf_patche,foc_patche,prox_patche,all_patche)
 
-#export the map to a pdf file 20 x 15 inches
+#export the map to a pdf file 7.93 x 3.64 inches
 
 
 #2012 plotting example of patch colonization####

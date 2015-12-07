@@ -8,7 +8,7 @@
 
 
 ###############################################################################
-#Functions to plot the scale and arrow
+#Functions to plot the scale
 ###############################################################################
 
 #function for a scale, found in "Auxiliary Cartographic Functions in R: 
