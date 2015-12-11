@@ -2,7 +2,7 @@
 
 #SelfOut
 
-The R code for the article on recombination of a plant pathogenic fungus, *Podosphaera plantaginis*, in the Åland Islands metapopulation. 
+The R and the Matlab code for the article on recombination of a plant pathogenic fungus, *Podosphaera plantaginis*, in the Åland Islands metapopulation. 
 
 ---
  
