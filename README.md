@@ -20,7 +20,7 @@ The R and the Matlab code for the article on recombination of a plant pathogenic
 
 ##List of the different scripts
 
-  * **coinfModel** This folder contains all the Matlab scripts used to run the ABC analysis analyzing the relative frequency of single infections vs co-infectionson.These scripts were developped by Jukka P. Sirén. 
+  * **coinfModel:** This folder contains all the Matlab scripts used for running the ABC analysis of the relative frequency of single infections vs co-infectionson in the host metapopulation.These scripts were developped by Jukka P. Sirén. 
   * **selfout_importdata.R:** script that is used to import and format the raw data. This script is for "internal" use only. It creates the input datafiles that are used in the `selfout_loadata.R` script.
   * **selfout_loadata.R:** script you have to run before any other scripts (except for `selfout_importdata.R`).
   * **selfout_glm.R:** script for the generalized linear model used to analysis the impact of coinfection on different life traits of *P. plantaginis*.
