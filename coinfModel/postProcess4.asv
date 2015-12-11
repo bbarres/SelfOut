@@ -1,0 +1,66 @@
+tic
+
+
+[Stf,lam,W,mju,sd] = plsTransformB(S,thetaraw,ncomp);
+if testready
+    [Stfobs] = plsTransform2(Sobs,lam,W,mju,sd);
+end
+[StfobsH] = plsTransform2(SobsH,lam,W,mju,sd);
+
+
+if testready
+    order = zeros(niter,nitertest);
+    
+    thetaR500 = zeros(500,nth,nitertest);
+    thetaR2 = zeros(size(thetaR100));
+    thetaR3 = zeros(size(thetaR500));
+    
+    
+    for i = 1:nitertest;
+        Stfobsi = Stfobs(i,:);
+        ero = sum((Stf-repmat(Stfobsi,niter,1)).^2,2);
+        apu = [ero (1:niter)'];
+        apu = sortrows(apu);
+        thetaR100(:,:,i) = regressPost(thetaraw,Stf,Stfobsi,apu(1:100,2));
+        thetaR500(:,:,i) = regressPost(thetaraw,Stf,Stfobsi,apu(1:500,2));
+        order(:,i) = apu(:,2);
+    end
+end
+ero = sum((Stf-repmat(StfobsH,niter,1)).^2,2);
+apu = [ero (1:niter)'];
+apu = sortrows(apu);
+thetaHR100 = regressPost(thetaraw,Stf,StfobsH,apu(1:100,2));
+thetaHR500 = regressPost(thetaraw,Stf,StfobsH,apu(1:500,2));
+thetaHR2 = zeros(size(thetaHR100));
+thetaHR3 = zeros(size(thetaHR500));
+
+
+for j = 1:nth    
+    [Stf2,lam2,W2,mju2,sd2] = plsTransformB(S,thetaraw(:,j),ncomp);
+    
+    [Stfobsi2] = plsTransform2(SobsH,lam2,W2,mju2,sd2);
+    ero2 = sum((Stf2-repmat(Stfobsi2,niter,1)).^2,2);
+    
+    apu2 = [ero2 (1:niter)'];
+    apu2 = sortrows(apu2);
+    thetaHR2(:,j) = regressPost(thetaraw(:,j),Stf2,Stfobsi2,apu2(1:100,2));
+    thetaHR3(:,j) = regressPost(thetaraw(:,j),Stf2,Stfobsi2,apu2(1:500,2));
+    if testready
+        [Stfobs2] = plsTransform2(Sobs,lam2,W2,mju2,sd2);
+        for i = 1:nitertest;
+            Stfobsi = Stfobs2(i,:);
+            ero2 = sum((Stf2-repmat(Stfobsi,niter,1)).^2,2);
+            apu2 = [ero2 (1:niter)'];
+            apu2 = sortrows(apu2);
+            thetaR2(:,j,i) = regressPost(thetaraw(:,j),Stf2,Stfobsi,apu(1:100,2));
+            thetaR3(:,j,i) = regressPost(thetaraw(:,j),Stf2,Stfobsi,apu(1:500,2));
+        end
+    end
+end
+
+
+
+
+
+disp('Post-processing done');
+toc
