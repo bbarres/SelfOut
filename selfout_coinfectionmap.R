@@ -64,8 +64,8 @@ northarrow <- function(loc,size,bearing=0,cols,cex=1,...) {
 #Loading and subsetting the data before analyses
 ###############################################################################
 
-#split the shapefile between islands of the Aland Archipelago where something 
-#is happenning, and islands where no data were collected
+#split the shapefile between islands of the Aland Archipelago where data has  
+#been collected, and islands where no data were collected
 Aland_lim<-Aland[Aland$RECNO %in% c(1,4,5,12,15,21,23,25,29,31,32,34,35,36,39,
                                     40,42,43,45,47,49,52),]
 Aland_sup<-Aland[!(Aland$RECNO %in% c(1,4,5,12,15,21,23,25,29,31,32,34,35,36,
@@ -185,24 +185,8 @@ points(purecoinf2012[,1:2],pch=19,cex=0.3,col=grey(0.5))
 scalebar(c(86000,6667000),20000,"km")
 color.legend(165000,6670000,167000,6715000,col.labels,
              myPal,gradient="y",align="rb")
-par(op) #export the map 32 x 10 inches
-
-#map with the color scale not starting as white (so we can distinguish between 
-#no data and no coinfection)
-col.labels<-breakcoin2012
-myPal<-colorRampPalette(brewer.pal(9,"Reds"))(25)[3:25]
-plot(Aland,lty=0)
-title(main="Map of the relative risk surface of coinfection vs infection 
-      in 2012")
-plot(prisk2012,col=myPal,add=TRUE)
-plot(Aland,add=TRUE,lwd=3)
-#adding the sampling point
-points(purecoinf2012[,1:2],pch=19,cex=1.2,col=grey(0.2))
-#adding the scalebar
-scalebar(c(86000,6667000),20000,"km",division.cex=1.5)
-color.legend(165000,6670000,167000,6715000,col.labels,
-             myPal,gradient="y",align="rb",cex=2) 
-#export the map 16 x 10 inches or 1600 x 1000 for jpeg
+par(op)
+#export the map 32 x 10 inches
 
 
 #Maps for 2013
@@ -261,64 +245,9 @@ color.legend(165000,6670000,167000,6715000,col.labels,
 par(op)
 #export the map 32 x 10 inches
 
-#map with the color scale not starting as white (so we can distinguish between 
-#no data and no coinfection)
-col.labels<-breakcoin2013
-myPal<-colorRampPalette(brewer.pal(9,"Reds"))(25)[3:25]
-plot(Aland,lty=0)
-title(main="Map of the relative risk surface of coinfection vs infection 
-      in 2013")
-plot(prisk2013,col=myPal,add=TRUE)
-plot(Aland,add=TRUE,lwd=3)
-#adding the sampling point
-points(purecoinf2013[,1:2],pch=19,cex=1.2,col=grey(0.2))
-#adding the scalebar
-scalebar(c(86000,6667000),20000,"km",division.cex=1.5)
-color.legend(165000,6670000,167000,6715000,col.labels,
-             myPal,gradient="y",align="rb",cex=2) 
-#export the map 16 x 10 inches or 1600 x 1000 for jpeg
-
 
 ###############################################################################
-#Map of the two relative risk surface in 2012 and 2013
-###############################################################################
-
-op<-par(mfrow=c(1,2))
-
-#map with the color scale not starting as white (so we can distinguish between 
-#no data and no coinfection)
-col.labels<-c("0","0.2","0.4","0.6","0.8")
-myPal<-colorRampPalette(brewer.pal(9,"Reds"))(25)[3:25]
-
-plot(Aland,lty=0)
-#title(main="Map of the relative risk surface of coinfection vs infection 
-#      in 2012")
-plot(prisk2012,col=myPal,zlim=c(0,0.8),add=TRUE)
-plot(Aland,add=TRUE,lwd=3)
-#adding the sampling point
-points(purecoinf2012[,1:2],pch=19,cex=1.2,col=grey(0.2))
-#adding the scalebar
-scalebar(c(86000,6667000),20000,"km",division.cex=1.5)
-#color.legend(165000,6670000,167000,6715000,col.labels,
-#             myPal,gradient="y",align="rb",cex=2) 
-
-plot(Aland,lty=0)
-#title(main="Map of the relative risk surface of coinfection vs infection 
-#      in 2013")
-plot(prisk2013,col=myPal,zlim=c(0,0.8),add=TRUE)
-plot(Aland,add=TRUE,lwd=3)
-#adding the sampling point
-points(purecoinf2013[,1:2],pch=19,cex=1.2,col=grey(0.2))
-#adding the scalebar
-scalebar(c(86000,6667000),20000,"km",division.cex=1.5)
-color.legend(165000,6670000,167000,6715000,col.labels,
-             myPal,gradient="y",align="rb",cex=2) 
-
-par(op)
-
-
-###############################################################################
-#Map for the final figure of the manuscript
+#Map for the figure of the manuscript (Figure 1)
 ###############################################################################
 
 #map with the color scale not starting as white (so we can distinguish between 
