@@ -196,6 +196,7 @@ drop1(modcolo_12,test="Chisq")
 #cleaning the environment
 rm(temp,active,foc_patches,colo_patches)
 
+
 ###############################################################################
 #Functions to plot the scale
 ###############################################################################
@@ -219,7 +220,7 @@ scalebar <- function(loc,length,unit="km",division.cex=.8,...) {
 
 
 ###############################################################################
-#Figure to examplify the main result of the analysis
+#Figure to examplify the main result of the analysis (Figure S6)
 ###############################################################################
 
 #2013 plotting example of patch colonization####
