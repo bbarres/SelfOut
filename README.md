@@ -48,7 +48,7 @@ The R and the Matlab code for the article on recombination of a plant pathogenic
 
 ---
 
-![alt text](http://googledrive.com/host/0B-FIusWb7o6PfjdhbUJncm1mdjM1NnQ1TWl6MHhZUnNRZjd6RkUtUVo5WlFsVURTV0lvQjA/Plantago_plant_model2.png "A drawing of a Plantago lanceolata")
+![alt text](https://drive.google.com/drive/folders/0B-FIusWb7o6PfjdhbUJncm1mdjM1NnQ1TWl6MHhZUnNRZjd6RkUtUVo5WlFsVURTV0lvQjA/Plantago_plant_model2.png "A drawing of a Plantago lanceolata")
 
 
 ---
