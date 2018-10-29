@@ -39,16 +39,16 @@ The R and the Matlab code for the article on recombination of a plant pathogenic
 
 ## Some map examples
 
-       2012               |           2013          
-:-------------------------:|:-------------------------:
-![alt text](http://googledrive.com/host/0B-FIusWb7o6PfjdhbUJncm1mdjM1NnQ1TWl6MHhZUnNRZjd6RkUtUVo5WlFsVURTV0lvQjA/CoinRisk12.png "Relative risk maps of coinfection vs infection in 2012. This map was obtained using 'spatstat' R package")  |  ![alt text](http://googledrive.com/host/0B-FIusWb7o6PfjdhbUJncm1mdjM1NnQ1TWl6MHhZUnNRZjd6RkUtUVo5WlFsVURTV0lvQjA/CoinRisk13.png "Relative risk maps of coinfection vs infection in 2013. This map was obtained using 'spatstat' R package")
+|       2012               |           2013          |
+| :-------------------------:|:-------------------------: |
+| ![alt text](https://qr7ida.db.files.1drv.com/y4mJrAz5Ny042WSZ9zbq_EGumvkFgZOXv2gYVt1oLTMHhQiLeNLHGTgREQcOuV7Q2b1UVpspHd-lAXEIjcl9FQXPY1gkR5kKsMwZniFcF97HGx2CmzbtVtEXjzMQL-s2Qk3IRyxOAVhW6aAHewvpRpWTfXb-uRMqmnau4swM7-iQBy7Tguy4gYYWAtTb-k7k81LmxGB35SJSnzVls_ig-4iDQ?width=384&height=269&cropmode=none "Relative risk maps of coinfection vs infection in 2012. This map was obtained using 'spatstat' R package")  |  ![alt text](https://qr7jda.db.files.1drv.com/y4mwm6rK-JGGs4OjD5eQkqm8HxZy390wWVYsjsqXo5MF5KDlpjuRAQZExs4TRdiClv5tAPelD45hLOldlp3-wFt45bcPIzOY9GL_Nirt_O1ELUfbcO_zh_ViqRI766jbYt4n9eVzwJVGF_x06k_oFIyOfYPipG4pxFGobTSqSd65KBxDpxOw3fbwZyNKV4VUqL9MC2WWfusJuFRc9bBt1s0jQ?width=435&height=269&cropmode=none "Relative risk maps of coinfection vs infection in 2013. This map was obtained using 'spatstat' R package") |
 
 >These maps show the relative risk to find a coinfected sample in the metapopulation of the plant pathogen *P. plantaginis*. The darker the red, the higher the probability to find a plant with multiple strains on a leaf. These maps show that coinfection is found everywhere in Åland Islands, that there is a lot of variation of the prevalence of coinfection across the system and that there is also some temporal variation of the distribution of coinfection from one year to another. 
 
 
 ---
 
-![alt text](http://drive.google.com/drive/folders/0B-FIusWb7o6PfjdhbUJncm1mdjM1NnQ1TWl6MHhZUnNRZjd6RkUtUVo5WlFsVURTV0lvQjA/Plantago_plant_model2.png "A drawing of a Plantago lanceolata")
+![alt text](https://q77eda.db.files.1drv.com/y4mXl1MxDgMnguwJWv3q842hOOGRgQQGUcEzrKJpUGEpnsVRxmSOXjvS9y4Cu-Nh4pfN9w63q6gZBasec87DaNQYOYikggJ-wOmPZg_LDA8RTqiypx7o_kuBsP9iWwi6R-d_PX6HF0HaN_I3JPtZY764bAzma7oMdrg8BodVsegUUp3HPA-oapIKVygvE5kWDtAZtTVmm2Nz0XfUVUzH-K9DA?width=960&height=720&cropmode=none "A drawing of a Plantago lanceolata")
 
 
 ---
