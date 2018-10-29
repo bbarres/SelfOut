@@ -1,6 +1,6 @@
 [![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.34573.svg)](http://dx.doi.org/10.5281/zenodo.34573)
 
-#SelfOut
+# SelfOut
 
 The R and the Matlab code for the article on recombination of a plant pathogenic fungus, *Podosphaera plantaginis*, in the Åland Islands metapopulation. 
 
@@ -9,7 +9,7 @@ The R and the Matlab code for the article on recombination of a plant pathogenic
 
        2012                |           2013          
 :-------------------------:|:-------------------------:
-![alt text](http://googledrive.com/host/0B-FIusWb7o6PfjdhbUJncm1mdjM1NnQ1TWl6MHhZUnNRZjd6RkUtUVo5WlFsVURTV0lvQjA/Samp2012.png "A map of coinfected and single infected samples in 2012")  |  ![alt text](http://googledrive.com/host/0B-FIusWb7o6PfjdhbUJncm1mdjM1NnQ1TWl6MHhZUnNRZjd6RkUtUVo5WlFsVURTV0lvQjA/Samp2013.png "A map of coinfected and single infected samples in 2013")
+![alt text](https://q77cda.db.files.1drv.com/y4mLortDGyBMAXBZal2NOntFHOssZmA_dfBG8w1CkEJig4DGM6Y_gEk8nDwCmcPswBT8Siyc7mB40FVB3YGWMglc45u7J9P_XSTadkfZ2n4GB9ILG2ueO3mZb1RMrtdUeBaLmqQsYpFukxMp2m599Pl4lIWGyBse6R2bgAQ1jAH5xEH4c_IqzSaREQw2yp1qZKxAaNU0Z1CFEqUMvEBxF1AsQ "A map of coinfected and single infected samples in 2012")  |  ![alt text](https://q77dda.db.files.1drv.com/y4muIZV4ZQ3-m1NSS82eTtX0f_e0J6zalHgGmgId6RCCLxEfszhu5_Y8u4HtY5qoysWiwiPNKGKLqjNt97jebjDZm9deQ7DxrHj5WkyzJs2I9sRH1G4QPhNvoWd8yE0-Q9ixOmcFi-SGXeagz5mOtQdxANcYPKbwRN4m260kxsVv3xIJBG9zS7bIEZWwhcOht2gxQm6LBuXCwqlmHgAn2I4zA "A map of coinfected and single infected samples in 2013")
 
 
 
@@ -18,7 +18,7 @@ The R and the Matlab code for the article on recombination of a plant pathogenic
 # 
 
 
-##List of the different scripts
+## List of the different scripts
 
   * **coinfModel:** This folder contains all the Matlab scripts used for running the ABC analysis of the relative frequency of single infections vs co-infectionson in the host metapopulation.These scripts were developped by Jukka P. Sirén. 
   * **selfout_importdata.R:** script that is used to import and format the raw data. This script is for "internal" use only. It creates the input datafiles that are used in the `selfout_loadata.R` script.
@@ -37,7 +37,7 @@ The R and the Matlab code for the article on recombination of a plant pathogenic
   * **selfout_GenoRichmap.R:** script to produce the map of the genotypic richness in 2012 and 2013. The genotypic richness was evaluated on a minimum sample size of 3 successfully genotyped pure individuals per patch. A spatial smoothing of the genotypic richness values was performed with the same bandwidth used for the coinfection map. 
 
 
-##Some map examples
+## Some map examples
 
        2012               |           2013          
 :-------------------------:|:-------------------------:
