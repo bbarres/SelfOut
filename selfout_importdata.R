@@ -4,8 +4,6 @@
 ###############################################################################
 ###############################################################################
 
-setwd("~/work/Rfichiers/Githuber/SelfOut_data")
-
 library(raster)
 library(maptools)
 library(vegan)
@@ -38,7 +36,7 @@ library(combinat)
 ###############################################################################
 
 #the code to deal with shapefile instead of RData file for GIS purpose
-Aland<-readShapePoly("RECNO.shp",proj4string=CRS("+init=epsg:2393"))
+Aland<-readShapePoly("data/RECNO.shp",proj4string=CRS("+init=epsg:2393"))
 Aland<-spTransform(Aland,CRS("+init=epsg:3067"))
 plot(Aland,col=grey(0.7),axes=FALSE,lty=0)
 patchshape<-readShapePoly("All patches.shp",proj4string=CRS("+init=epsg:3067"))
@@ -47,16 +45,16 @@ plot(Aland,col=grey(0.85),lty=0)
 plot(patchshape,col="red",lty=0,add=TRUE)
 
 #loading patches informations
-patche_info<-read.table("coord_all_patch12.txt",header=TRUE, sep="\t",dec=".")
+patche_info<-read.table("data/coord_all_patch12.txt",header=TRUE, sep="\t",dec=".")
 #we reorganize the coord data file
 patche_info<-patche_info[,c(1:12,14:dim(patche_info)[2])]
 points(patche_info$Longitude,patche_info$Latitude,cex=1,bg="white",pch=21)
 
 #loading the sample information data
-sample_info<-read.table("sample_info4.txt", header=TRUE, sep="\t", dec=".")
+sample_info<-read.table("data/sample_info4.txt", header=TRUE, sep="\t", dec=".")
 
 #loading genotypes data
-geno_hom<-read.table("geno_hom10_13.txt",header=TRUE,sep="\t",
+geno_hom<-read.table("data/geno_hom10_13.txt",header=TRUE,sep="\t",
                      stringsAsFactors=FALSE)
 geno_hom<-merge(geno_hom,sample_info,by.x="UNIC_ID",by.y="FIMM_ID")
 geno_hom<-merge(geno_hom,patche_info,by.x="patche_ID",by.y="ID",all.x=TRUE)
@@ -1049,13 +1047,13 @@ boxplot(as.numeric(as.character(Div_Patch2013$Gr2013))~Div_Patch2013$Age_0_1)
 #export the tables and clean the environment
 ###############################################################################
 
-write.table(Div_Patch2010,file="stat_patch2010.txt",row.names=FALSE,
+write.table(Div_Patch2010,file="data/stat_patch2010.txt",row.names=FALSE,
             quote=FALSE,sep="\t")
-write.table(Div_Patch2011,file="stat_patch2011.txt",row.names=FALSE,
+write.table(Div_Patch2011,file="data/stat_patch2011.txt",row.names=FALSE,
             quote=FALSE,sep="\t")
-write.table(Div_Patch2012,file="stat_patch2012.txt",row.names=FALSE,
+write.table(Div_Patch2012,file="data/stat_patch2012.txt",row.names=FALSE,
             quote=FALSE,sep="\t")
-write.table(Div_Patch2013,file="stat_patch2013.txt",row.names=FALSE,
+write.table(Div_Patch2013,file="data/stat_patch2013.txt",row.names=FALSE,
             quote=FALSE,sep="\t")
 
 rm(list=ls())
